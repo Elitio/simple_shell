@@ -41,4 +41,8 @@ typedef struct data
 	char *pid;
 } data_shell;
 
+char *custom_swap(char *input, int option);
+char *without_comment(char *in);
+int first_char(char *input, int *i);
 
+#endif
