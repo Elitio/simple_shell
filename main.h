@@ -44,5 +44,6 @@ typedef struct data
 char *custom_swap(char *input, int option);
 char *without_comment(char *in);
 int first_char(char *input, int *i);
+void add_nodes(sep_list **head_s, line_list **head_l, char *input);
 
 #endif
