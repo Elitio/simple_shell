@@ -45,5 +45,7 @@ char *custom_swap(char *input, int option);
 char *without_comment(char *in);
 int first_char(char *input, int *i);
 void add_nodes(sep_list **head_s, line_list **head_l, char *input);
-
+void go_next(sep_list **list_s, line_list **list_l, data_shell *datash);
+int split_commands(data_shell *datash, char *input);
+char **split_line(char *input);
 #endif
