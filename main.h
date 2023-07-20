@@ -57,7 +57,8 @@ int is_var_empty(r_var *pointr);
 int is_val_empty(r_var *pointr);
 int copy_var_val_to_new_input(r_var *pointr, char *new_input, int i);
 int skip_var_in_input(r_var *pointr);
-
+void set_data(data_shell *shell_data, char **arg_vector);
+void free_data(data_shell *shell_data);
 
 
 #endif
