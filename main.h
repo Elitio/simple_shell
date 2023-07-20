@@ -41,11 +41,23 @@ typedef struct data
 	char *pid;
 } data_shell;
 
-char *custom_swap(char *input, int option);
+char *swap_char(char *input, int option);
 char *without_comment(char *in);
 int first_char(char *input, int *i);
 void add_nodes(sep_list **head_s, line_list **head_l, char *input);
 void go_next(sep_list **list_s, line_list **list_l, data_shell *datash);
 int split_commands(data_shell *datash, char *input);
 char **split_line(char *input);
+
+/* new functions added */
+int get_value_length(char *value);
+int get_command_length(char *command);
+int cust_strlen(char *str_inp);
+int is_var_empty(r_var *pointr);
+int is_val_empty(r_var *pointr);
+int copy_var_val_to_new_input(r_var *pointr, char *new_input, int i);
+int skip_var_in_input(r_var *pointr);
+
+
+
 #endif
