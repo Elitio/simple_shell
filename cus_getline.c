@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "main.h"
 
 /**
 * init_buffer - initiate buffer and size of buffer allocate memory for it
