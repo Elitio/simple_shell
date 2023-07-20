@@ -20,14 +20,14 @@
 extern char **environ;
 
 /**
- * struct data - Contains all important data for runtime purposes.
- * @input: This is the command line written by a user.
- * @av: argument vector.
- * @args: The tokens of the the command line.
+ * struct data - Structure with members for keeping program variable data.
+ * @input: This is the command input member.
+ * @av: argument array.
+ * @args: Thew command line tokens
  * @status: The last status of the shell.
- * @counter: The lines counter.
- * @_environ: The environment variable.
- * @pid: Process ID of the shell.
+ * @counter: lines counter.
+ * @_environ: environment variable.
+ * @pid: Process ID
  */
 
 typedef struct data
@@ -37,7 +37,7 @@ typedef struct data
 	char args;
 	int status;
 	int counter;
-	char **_envirion;
+	char **_environ;
 	char *pid;
 } data_shell;
 
@@ -57,8 +57,29 @@ int is_var_empty(r_var *pointr);
 int is_val_empty(r_var *pointr);
 int copy_var_val_to_new_input(r_var *pointr, char *new_input, int i);
 int skip_var_in_input(r_var *pointr);
+
+
+
+/*old functions added */
+void check_env(r_var **strnode, char *user_inp, data_shell *struct_info);
+
+int check_vars(r_var **strnode, char *user_inp, char *str_stat,
+		data_shell *struct_info);
+
 void set_data(data_shell *shell_data, char **arg_vector);
+
 void free_data(data_shell *shell_data);
+char *without_comment(char *input_str);
+
+void shell_loop(data_shell *data_shell_info);
+
+void get_sigint(int signal);
+
+char *replaced_input(r_var **strNode, char *str_inp, char *replaced_str,
+int len_new);
+
+char *rep_var(char *str_inp, data_shell *struct_info);
+
 
 
 #endif
