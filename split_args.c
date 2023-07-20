@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * custom_swap - Will swap & and | for non print characters.
+ * swap_char - Will swap & and | for non print characters.
  * @input: in put string.
  * @option: characters equivalent ASCII character.
  *
  * Return: Wil return the swapped string.
  */
 
-char *custom_swap(char *input, int option)
+char *swap_char(char *input, int option)
 {
 	int i = 0;
 
