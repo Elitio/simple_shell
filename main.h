@@ -96,4 +96,6 @@ void cd_to_home(data_shell *shell_data);
 
 void cd_to(data_shell *shell_data);
 
+int cd_shell(data_shell *data_shell);
+
 #endif
