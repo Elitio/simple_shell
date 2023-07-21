@@ -98,4 +98,11 @@ void cd_to(data_shell *shell_data);
 
 int cd_shell(data_shell *data_shell);
 
+int _strcmp(char *first_str, char *second_str);
+int _strspn(char *string, char *checkn_str);
+char *_strcat(char *str_dest, const char *str_source);
+char *_strchr(char *string, char charac);
+char *_strcpy(char *str_dest, char *str_source);
+void rev_string(char *string);
+
 #endif
