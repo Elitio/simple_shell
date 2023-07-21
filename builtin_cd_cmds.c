@@ -197,3 +197,55 @@ void cd_to(data_shell *shell_data)
 
 	shell_data->status = 0;
 }
+
+
+
+
+/**
+ * cd_shell - handles the cd command with or without args
+ *
+ * @data_shell: structure parameter
+ * Return: 1 on success
+ */
+int cd_shell(data_shell *data_shell)
+{
+	char *directory;
+	int success = 1;
+	int spec_home, spec_delta, spec_doubdash;
+
+	directory = data_shell->args[1];
+
+
+	if (directory == NULL)
+	{
+		cd_to_home(data_shell);
+		return (success);
+	}
+
+	spec_home = _strcmp("$HOME", directory);
+
+	spec_delta = _strcmp("~", directory);
+
+	spec_doubdash = _strcmp("--", directory);
+
+	if (spec_home || spec_delta || spec_doubdash)
+	{
+		if (_strcmp("-", directory) == 0)
+		{
+			cd_previous(data_shell);
+
+			return (success);
+		}
+	}
+
+	if (_strcmp(".", directory) == 0 || _strcmp("..", directory) == 0)
+	{
+		cd_dot(data_shell);
+
+		return (success);
+	}
+
+	cd_to(data_shell);
+		return (success);
+}
+
