@@ -51,6 +51,7 @@ char **split_line(char *input);
 int is_cdir(char *path_str, int *index_ptr);
 char *which(char *cmd, char **environ);
 int its_executable(data_shell *datash);
+int (*get_builtin(char *cmd))(data_shell *);
 
 /* new functions added */
 int get_value_length(char *value);
