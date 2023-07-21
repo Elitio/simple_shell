@@ -88,4 +88,12 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 
 char *read_line(int *is_end_of_file);
 
+void cd_dot(data_shell *shell_data);
+
+void cd_previous(data_shell *shell_data);
+
+void cd_to_home(data_shell *shell_data);
+
+void cd_to(data_shell *shell_data);
+
 #endif
