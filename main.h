@@ -83,6 +83,8 @@ int len_new);
 
 char *rep_var(char *str_inp, data_shell *struct_info);
 
+ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 
+char *read_line(int *is_end_of_file);
 
 #endif

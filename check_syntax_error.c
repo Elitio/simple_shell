@@ -1,4 +1,4 @@
-~include "main.h"
+#include "main.h"
 
 /**
  * check_syntax_error - Finds and print a syntax error.
