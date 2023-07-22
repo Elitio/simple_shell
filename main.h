@@ -119,6 +119,8 @@ char **_reallocdp(char **array_ptr, unsigned int prev_size,
 		unsigned int realloc_size);
 void *_realloc(void *inp_buffer, unsigned int prev_size,
 		unsigned int realloc_size);
+void free_rvar_list(r_var **head);
+r_var *add_rvar_node(r_var **head, int var_len, char *var_val, int val_len);
 
 
 #endif
