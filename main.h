@@ -114,6 +114,11 @@ int _isdigit(const char *string);
 char *aux_itoa(int inp_int);
 int _atoi(char *str_wth_digs);
 int get_len(int inp_int);
+void _memcpy(void *dest_ptr, const void *src_ptr, unsigned int cpy_size);
+char **_reallocdp(char **array_ptr, unsigned int prev_size,
+		unsigned int realloc_size);
+void *_realloc(void *inp_buffer, unsigned int prev_size,
+		unsigned int realloc_size);
 
 
 #endif
