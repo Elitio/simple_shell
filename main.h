@@ -106,5 +106,11 @@ char *_strcat(char *str_dest, const char *str_source);
 char *_strchr(char *string, char charac);
 char *_strcpy(char *str_dest, char *str_source);
 void rev_string(char *string);
+int cmp_chars(char string[], const char *delim);
+char *_strtok(char string[], const char *delim);
+char *_strdup(const char *string);
+int _strlen(const char *string);
+int _isdigit(const char *string);
+
 
 #endif
