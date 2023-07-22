@@ -111,6 +111,9 @@ char *_strtok(char string[], const char *delim);
 char *_strdup(const char *string);
 int _strlen(const char *string);
 int _isdigit(const char *string);
+char *aux_itoa(int inp_int);
+int _atoi(char *str_wth_digs);
+int get_len(int inp_int);
 
 
 #endif
