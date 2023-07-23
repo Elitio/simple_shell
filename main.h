@@ -125,5 +125,6 @@ void free_sep_list(sep_list **head);
 void free_line_list(line_list **head);
 sep_list *add_sep_node_end(sep_list **head, char separat);
 line_list *add_line_node_end(line_list **head, char *ptr_line);
+int get_error(data_shell *shell_data, int error_ref);
 
 #endif
