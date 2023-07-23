@@ -5,7 +5,7 @@
 /**
  * exec_line -  dispatcher for handling built-in commands and external
  * commands(system commands).
- * @shell_data: data relevant (args)
+ * @shell_data: structure parameter
  * Return: 1 for no command or 0 if the command is executed successfully,
  */
 int exec_line(data_shell *shell_data)
