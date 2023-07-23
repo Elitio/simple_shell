@@ -131,6 +131,7 @@ char *error_env(data_shell *shell_data);
 char *error_exit_shell(data_shell *shell_data);
 char *error_path_126(data_shell *shell_data);
 char *error_get_cd(data_shell *shell_data);
+int exit_shell(data_shell *shell_data);
 
 
 
