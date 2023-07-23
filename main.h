@@ -126,5 +126,13 @@ void free_line_list(line_list **head);
 sep_list *add_sep_node_end(sep_list **head, char separat);
 line_list *add_line_node_end(line_list **head, char *ptr_line);
 int get_error(data_shell *shell_data, int error_ref);
+char *error_not_found(data_shell *shell_data);
+char *error_env(data_shell *shell_data);
+char *error_exit_shell(data_shell *shell_data);
+char *error_path_126(data_shell *shell_data);
+char *error_get_cd(data_shell *shell_data);
+
+
+
 
 #endif
