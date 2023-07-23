@@ -121,6 +121,9 @@ void *_realloc(void *inp_buffer, unsigned int prev_size,
 		unsigned int realloc_size);
 void free_rvar_list(r_var **head);
 r_var *add_rvar_node(r_var **head, int var_len, char *var_val, int val_len);
-
+void free_sep_list(sep_list **head);
+void free_line_list(line_list **head);
+sep_list *add_sep_node_end(sep_list **head, char separat);
+line_list *add_line_node_end(line_list **head, char *ptr_line);
 
 #endif
