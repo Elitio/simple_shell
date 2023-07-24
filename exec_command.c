@@ -85,7 +85,7 @@ char *which(char *cmd, char **environ)
  * @datash: data structure
  * Return: 0 if it is not an executable, the index if it is.
  */
-int its_executable(data_shell *datash)
+int is_executable(data_shell *datash)
 {
 	struct stat st;
 	int i = 0;
@@ -130,4 +130,102 @@ int its_executable(data_shell *datash)
 
 	get_error(datash, 127);
 	return (-1);
+}
+
+/**
+ * check_error_cmd - verifies if user has permissions to access.
+ *
+ * @dir: destination directory
+ * @datash: data structure
+ * Return: 1 if there is an error, 0 if not
+ */
+
+int check_error_cmd(char *dir, data_shell *datash)
+{
+	int is_error = 0;
+
+	if (dir == NULL)
+	{
+		get_error(datash, 127);
+		is_error = 1;
+	}
+	else if (strcmp(datash->args[0], dir) != 0)
+	{
+		if (access(dir, X_OK) == -1)
+		{
+			get_error(datash, 126);
+			is_error = 1;
+		}
+		free(dir);
+	}
+	else
+	{
+		if (access(datash->args[0], X_OK) == -1)
+		{
+			get_error(datash, 126);
+			is_error = 1;
+		}
+	}
+       
+	return is_error;
+}
+
+/**
+ * execute_command - executes command lines args.
+ *
+ * @datash: relevant accessed data are args and inpu.
+ * Return: 1 on success.
+ */
+
+int execute_command(data_shell *datash)
+{
+	pid_t pd;
+	pid_t wpd;
+	int state;
+	int exec;
+	char *dir;
+	(void) wpd;
+
+	exec = is_executable(datash);
+	if (exec == -1)
+	{
+		return (1);
+	}
+	if (exec == 0)
+	{
+		dir = which(datash->args[0], datash->_environ);
+		if (check_error_cmd(dir, datash) == 1)
+		{
+			return (1);
+		}
+	}
+
+	pd = fork();
+	if (pd == 0)
+	{
+		if (exec == 0)
+		{
+			dir = which(datash->args[0], datash->_environ);
+		}
+        else
+	{
+		dir = datash->args[0];
+		execve(dir + exec, datash->args, datash->_environ);
+	}
+	else if (pd < 0)
+	{
+		perror(datash->av[0]);
+		return (1);
+	}
+	else
+	{
+		do
+		{
+			wpd = waitpid(pd, &state, WUNTRACED);
+		}
+		while (!WIFEXITED(state) && !WIFSIGNALED(state));
+	}
+
+	datash->status = state / 256;
+	return (1);
 }
