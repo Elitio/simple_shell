@@ -11,6 +11,9 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <limits.h>
+#include <stddef.h>
+
+#include <stdbool.h>
 
 #define BUFSIZE 1024
 #define TOK_BUFSIZE 128
@@ -87,5 +90,51 @@ char *rep_var(char *str_inp, data_shell *struct_info);
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 
 char *read_line(int *is_end_of_file);
+
+void cd_dot(data_shell *shell_data);
+
+void cd_previous(data_shell *shell_data);
+
+void cd_to_home(data_shell *shell_data);
+
+void cd_to(data_shell *shell_data);
+
+int cd_shell(data_shell *data_shell);
+
+int _strcmp(char *first_str, char *second_str);
+int _strspn(char *string, char *checkn_str);
+char *_strcat(char *str_dest, const char *str_source);
+char *_strchr(char *string, char charac);
+char *_strcpy(char *str_dest, char *str_source);
+void rev_string(char *string);
+int cmp_chars(char string[], const char *delim);
+char *_strtok(char string[], const char *delim);
+char *_strdup(const char *string);
+int _strlen(const char *string);
+int _isdigit(const char *string);
+char *aux_itoa(int inp_int);
+int _atoi(char *str_wth_digs);
+int get_len(int inp_int);
+void _memcpy(void *dest_ptr, const void *src_ptr, unsigned int cpy_size);
+char **_reallocdp(char **array_ptr, unsigned int prev_size,
+		unsigned int realloc_size);
+void *_realloc(void *inp_buffer, unsigned int prev_size,
+		unsigned int realloc_size);
+void free_rvar_list(r_var **head);
+r_var *add_rvar_node(r_var **head, int var_len, char *var_val, int val_len);
+void free_sep_list(sep_list **head);
+void free_line_list(line_list **head);
+sep_list *add_sep_node_end(sep_list **head, char separat);
+line_list *add_line_node_end(line_list **head, char *ptr_line);
+int get_error(data_shell *shell_data, int error_ref);
+char *error_not_found(data_shell *shell_data);
+char *error_env(data_shell *shell_data);
+char *error_exit_shell(data_shell *shell_data);
+char *error_path_126(data_shell *shell_data);
+char *error_get_cd(data_shell *shell_data);
+int exit_shell(data_shell *shell_data);
+
+
+
 
 #endif
