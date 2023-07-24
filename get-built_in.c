@@ -21,7 +21,6 @@ int (*get_builtin(char *cmd))(data_shell *)
 		{ "env", _env },
 		{ "exit", exit_shell },
 		{ "setenv", _setenv },
-		{ "help", get_help },
 		{ NULL, NULL }
 	};
 

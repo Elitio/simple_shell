@@ -55,6 +55,8 @@ int is_cdir(char *path_str, int *index_ptr);
 char *which(char *cmd, char **environ);
 int its_executable(data_shell *datash);
 int (*get_builtin(char *cmd))(data_shell *);
+int check_error_cmd(char *dir, data_shell *datash);
+int cmd_exec(data_shell *datash);
 
 /* new functions added */
 int get_value_length(char *value);
@@ -64,7 +66,7 @@ int is_var_empty(r_var *pointr);
 int is_val_empty(r_var *pointr);
 int copy_var_val_to_new_input(r_var *pointr, char *new_input, int i);
 int skip_var_in_input(r_var *pointr);
-
+void print_syntax_error(data_shell *datash, char *input, int i, int bool)
 
 
 /*old functions added */
