@@ -19,6 +19,7 @@ char *error_not_found(data_shell *shell_data)
 
 	if (err_str == NULL)
 	{
+		free(prg_ver_str);
 		return (NULL);
 	}
 
@@ -42,7 +43,6 @@ char *error_not_found(data_shell *shell_data)
 	{
 		err_str[index++] = err_str_msg[i];
 	}
-
 	err_str[index] = '\0';
 	free(prg_ver_str);
 
