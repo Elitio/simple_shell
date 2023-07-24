@@ -13,9 +13,8 @@
  */
 int get_error(data_shell *shell_data, int error_ref)
 {
-	char *error;
+	char *error = NULL;
 
-	error = NULL;
 
 
 	if (error_ref == -1)
