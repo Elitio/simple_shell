@@ -186,6 +186,10 @@ char *error_exit_shell(data_shell *shell_data);
 char *error_path_126(data_shell *shell_data);
 char *error_get_cd(data_shell *shell_data);
 int exit_shell(data_shell *shell_data);
+int _setenv(data_shell *shell_data);
+char *copy_info(char *env_name, char *env_value);
+void set_env(char *env_name, char *env_value, data_shell *shell_data);
+int _unsetenv(data_shell *shell_data);
 
 
 
