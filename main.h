@@ -102,7 +102,6 @@ typedef struct data
 
 
 
-char *without_comment(char *in);
 
 int (*get_builtin(char *cmd))(data_shell *);
 
