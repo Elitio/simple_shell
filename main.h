@@ -122,7 +122,11 @@ int first_char(char *inp_str, int *ind);
 int repeated_char(char *inp_str, int ind);
 int error_sep_op(char *inp_str, int ind, char ind_sep_end);
 int check_syntax_error(data_shell *shell_data, char *inp_str);
-
+void add_nodes(sep_list **sepHead, line_list **cmdHead, char *inp_str);
+char **split_line(char *inp_str);
+void go_next(sep_list **sepHead, line_list **cmdHead, data_shell *shell_data);
+char *swap_char(char *inp_str, int isZero);
+int split_commands(data_shell *shell_data, char *inp_str);
 
 
 
