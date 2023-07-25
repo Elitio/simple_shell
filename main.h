@@ -103,7 +103,7 @@ typedef struct data
 
 char *swap_char(char *input, int option);
 char *without_comment(char *in);
-int first_char(char *input, int *i);
+
 void add_nodes(sep_list **head_s, line_list **head_l, char *input);
 void go_next(sep_list **list_s, line_list **list_l, data_shell *datash);
 int split_commands(data_shell *datash, char *input);
@@ -116,6 +116,12 @@ char *_which(char *inp_cmd, char **_environ);
 int cmd_exec(data_shell *shell_data);
 int is_cdir(char *str_path, int *cur_pos_ind);
 int is_executable(data_shell *shell_data);
+void print_syntax_error(data_shell *shell_data, char *inp_str, int ind,
+		int isSingle);
+int first_char(char *inp_str, int *ind);
+int repeated_char(char *inp_str, int ind);
+int error_sep_op(char *inp_str, int ind, char ind_sep_end);
+int check_syntax_error(data_shell *shell_data, char *inp_str);
 
 
 
