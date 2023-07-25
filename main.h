@@ -108,12 +108,14 @@ void add_nodes(sep_list **head_s, line_list **head_l, char *input);
 void go_next(sep_list **list_s, line_list **list_l, data_shell *datash);
 int split_commands(data_shell *datash, char *input);
 char **split_line(char *input);
-int is_cdir(char *path_str, int *index_ptr);
-char *which(char *cmd, char **environ);
-int its_executable(data_shell *datash);
 int (*get_builtin(char *cmd))(data_shell *);
-int check_error_cmd(char *dir, data_shell *datash);
-int cmd_exec(data_shell *datash);
+
+/*function edits */
+int check_error_cmd(char *direct, data_shell *shell_data);
+char *_which(char *inp_cmd, char **_environ);
+int cmd_exec(data_shell *shell_data);
+int is_cdir(char *str_path, int *cur_pos_ind);
+int is_executable(data_shell *shell_data);
 
 
 
