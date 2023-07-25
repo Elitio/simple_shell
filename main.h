@@ -1,23 +1,79 @@
 #ifndef _MAIN_
 #define _MAIN_
 
-#include <stdio.h>
+
 #include <unistd.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
 #include <errno.h>
-#include <fcntl.h>
-#include <signal.h>
 #include <limits.h>
 #include <stddef.h>
+#include <sys/wait.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <signal.h>
+
 
 #define BUFSIZE 1024
 #define TOK_BUFSIZE 128
 #define TOK_DELIM " \t\r\n\a"
 
 extern char **environ;
+
+
+/**
+ * struct line_list_s - a single linked list structure
+ * @line: command line variable
+ * @next: next node of the list
+ */
+typedef struct line_list_s
+{
+	char *line;
+	struct line_list_s *next;
+} line_list;
+
+
+/**
+ * struct sep_list_s - a singly linked list structure
+ * @separator: separator
+ * @next: next node of the list
+ */
+typedef struct sep_list_s
+{
+	char separator;
+	struct sep_list_s *next;
+} sep_list;
+
+
+
+
+/**
+ * struct builtin_s - Builtin structure for command arguments.
+ * @name: command builtin name
+ * @f: pointer func of data type
+ */
+typedef struct builtin_s
+{
+	char *name;
+	int (*f)(data_shell *datash);
+} builtin_t;
+
+/**
+ * struct r_var_list - single linked list structure
+ * @len_var: variable length
+ * @val: variable value
+ * @len_val: value length
+ * @next: next node of the list
+ */
+typedef struct r_var_list
+{
+	int len_var;
+	char *val;
+	int len_val;
+	struct r_var_list *next;
+} r_var;
+
 
 /**
  * struct data - Structure with members for keeping program variable data.
@@ -41,53 +97,6 @@ typedef struct data
 	char *pid;
 } data_shell;
 
-/**
- * struct sep_list_s - a singly linked list structure
- * @separator: separator
- * @next: next node of the list
- */
-typedef struct sep_list_s
-{
-	char separator;
-	struct sep_list_s *next;
-} sep_list;
-
-/**
- * struct line_list_s - a single linked list structure
- * @line: command line variable
- * @next: next node of the list
- */
-typedef struct line_list_s
-{
-	char *line;
-	struct line_list_s *next;
-} line_list;
-
-/**
- * struct r_var_list - single linked list structure
- * @len_var: variable length
- * @val: variable value
- * @len_val: value length
- * @next: next node of the list
- */
-typedef struct r_var_list
-{
-	int len_var;
-	char *val;
-	int len_val;
-	struct r_var_list *next;
-} r_var;
-
-/**
- * struct builtin_s - Builtin structure for command arguments.
- * @name: command builtin name
- * @f: pointer func of data type
- */
-typedef struct builtin_s
-{
-	char *name;
-	int (*f)(data_shell *datash);
-} builtin_t;
 
 
 
