@@ -1,25 +1,26 @@
 #include "main.h"
 
 /**
- * first_char - finds index of the first char.
- *
- * @input: input string
- * @i: index
- * Return: Will return 1 if there is error, and 0 if otherwise.
+ * first_char - finds the index of first non-whitespace char of input
+ * @inp_str: pointer to input string
+ * @ind: pointer to int representing the index of first non-whitespace char
+ * Return: -1 if its a special char, 0 if its neither a whitespace
+ * character nor a special character
  */
-
-int first_char(char *input, int *i)
+int first_char(char *inp_str, int *ind)
 {
+	*ind = 0;
 
-	for (*i = 0; input[*i]; *i += 1)
+	while (inp_str[*ind] && (inp_str[*ind] == ' '
+				|| inp_str[*ind] == '\t'))
 	{
-		if (input[*i] == ' ' || input[*i] == '\t')
-			continue;
+		(*ind)++;
+	}
 
-		if (input[*i] == ';' || input[*i] == '|' || input[*i] == '&')
-			return (-1);
-
-		break;
+	if (inp_str[*ind] == '\0' || inp_str[*ind] == ';' || inp_str[*ind]
+			== '|' || inp_str[*ind] == '&')
+	{
+		return (-1);
 	}
 
 	return (0);
