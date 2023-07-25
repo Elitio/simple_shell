@@ -190,6 +190,9 @@ int _setenv(data_shell *shell_data);
 char *copy_info(char *env_name, char *env_value);
 void set_env(char *env_name, char *env_value, data_shell *shell_data);
 int _unsetenv(data_shell *shell_data);
+char *_getenv(const char *name_inp, char **_environ);
+int _env(data_shell *shell_data);
+int cmp_env_name(const char *env_var_name, const char *name_input);
 
 
 
