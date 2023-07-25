@@ -1,61 +1,5 @@
 #include "main.h"
 
-<<<<<<< HEAD
-
-
-
-
-
-
-/**
- * swap_char - performs character swapping based on the value of
- * the isZero parameter.
- * @inp_str: string input parameter
- * @isZero: int check for zero or non-zero to specify swap type
- * Return: final swapped string
-  */
-char *swap_char(char *inp_str, int isZero)
-{
-	int ind;
-
-	if (isZero == 0)
-	{
-		ind = 0;
-		while (inp_str[ind])
-		{
-			if (inp_str[ind] == '|')
-			{
-				if (inp_str[ind + 1] != '|')
-					inp_str[ind] = 16;
-				else
-					ind++;
-			}
-
-			if (inp_str[ind] == '&')
-			{
-				if (inp_str[ind + 1] != '&')
-					inp_str[ind] = 12;
-				else
-					ind++;
-			}
-			ind++;
-		}
-	}
-	else
-	{
-		ind = 0;
-		while (inp_str[ind])
-		{
-			inp_str[ind] = (inp_str[ind] == 16 ? '|'
-					: inp_str[ind]);
-			inp_str[ind] = (inp_str[ind] == 12 ? '&'
-					: inp_str[ind]);
-
-			ind++;
-		}
-	}
-	return (inp_str);
-=======
 /**
  * add_nodes - parses and adds nodes to 2 linked lists.
  * @sepHead: pointer to head of separator linked list
@@ -132,24 +76,11 @@ char **split_line(char *inp_str)
 
 	toks[cur_ind] = NULL;
 	return (toks);
->>>>>>> 8d67054384870aba1c40d42fbe8e4c8164645111
 }
 
 
 
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 8d67054384870aba1c40d42fbe8e4c8164645111
 /**
  * go_next - navigate through linked lists of sep_list and line_list nodes
  * based on the exit status (datash->status) of the previous command execution
@@ -200,12 +131,7 @@ char *swap_char(char *inp_str, int isZero)
 		ind = 0;
 		while (inp_str[ind])
 		{
-<<<<<<< HEAD
-			if (current_sep->separator == '&'
-					|| current_sep->separator == ';')
-=======
 			if (inp_str[ind] == '|')
->>>>>>> 8d67054384870aba1c40d42fbe8e4c8164645111
 			{
 				if (inp_str[ind + 1] != '|')
 					inp_str[ind] = 16;
@@ -228,22 +154,8 @@ char *swap_char(char *inp_str, int isZero)
 		ind = 0;
 		while (inp_str[ind])
 		{
-<<<<<<< HEAD
-			if (current_sep->separator == '|' ||
-					current_sep->separator == ';')
-			{
-				loop_sep = 0;
-			}
-			else if (current_sep->separator == '&')
-			{
-				current_line = current_line->next;
-				current_sep = current_sep->next;
-			}
-		}
-=======
 			inp_str[ind] = (inp_str[ind] == 16 ? '|' : inp_str[ind]);
 			inp_str[ind] = (inp_str[ind] == 12 ? '&' : inp_str[ind]);
->>>>>>> 8d67054384870aba1c40d42fbe8e4c8164645111
 
 			ind++;
 		}
@@ -298,7 +210,3 @@ int split_commands(data_shell *shell_data, char *inp_str)
 
 	return (loop);
 }
-
-
-
-
