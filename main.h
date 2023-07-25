@@ -13,23 +13,20 @@
 #include <limits.h>
 #include <stddef.h>
 
-#include <stdbool.h>
-
 #define BUFSIZE 1024
 #define TOK_BUFSIZE 128
 #define TOK_DELIM " \t\r\n\a"
 
-/* Points to an array of pointers to strings called the "environment" */
 extern char **environ;
 
 /**
  * struct data - Structure with members for keeping program variable data.
  * @input: This is the command input member.
- * @av: argument array.
- * @args: Thew command line tokens
+ * @av: arguments array to the prgram.
+ * @args: The command line tokens or the comand input
  * @status: The last status of the shell.
- * @counter: lines counter.
- * @_environ: environment variable.
+ * @counter: counter.
+ * @_environ: array of environment variables
  * @pid: Process ID
  */
 
@@ -45,10 +42,9 @@ typedef struct data
 } data_shell;
 
 /**
- * struct sep_list_s - singly linked list
- * @separator: ; | &
- * @next: next node
- * Description: single linked list to store separators
+ * struct sep_list_s - a singly linked list structure
+ * @separator: separator
+ * @next: next node of the list
  */
 typedef struct sep_list_s
 {
@@ -57,10 +53,9 @@ typedef struct sep_list_s
 } sep_list;
 
 /**
- * struct line_list_s - single linked list
- * @line: command line
- * @next: next node
- * Description: single linked list to store command lines
+ * struct line_list_s - a single linked list structure
+ * @line: command line variable
+ * @next: next node of the list
  */
 typedef struct line_list_s
 {
@@ -69,12 +64,11 @@ typedef struct line_list_s
 } line_list;
 
 /**
- * struct r_var_list - single linked list
- * @len_var: length of the variable
- * @val: value of the variable
- * @len_val: length of the value
- * @next: next node
- * Description: single linked list to store variables
+ * struct r_var_list - single linked list structure
+ * @len_var: variable length
+ * @val: variable value
+ * @len_val: value length
+ * @next: next node of the list
  */
 typedef struct r_var_list
 {
@@ -85,15 +79,18 @@ typedef struct r_var_list
 } r_var;
 
 /**
- * struct builtin_s - Builtin struct for command args.
- * @name: The name of the command builtin i.e cd, exit, env
- * @f: data type pointer function.
+ * struct builtin_s - Builtin structure for command arguments.
+ * @name: command builtin name
+ * @f: pointer func of data type
  */
 typedef struct builtin_s
 {
 	char *name;
 	int (*f)(data_shell *datash);
 } builtin_t;
+
+
+
 
 char *swap_char(char *input, int option);
 char *without_comment(char *in);
@@ -109,7 +106,11 @@ int (*get_builtin(char *cmd))(data_shell *);
 int check_error_cmd(char *dir, data_shell *datash);
 int cmd_exec(data_shell *datash);
 
-/* new functions added */
+
+
+
+
+
 int get_value_length(char *value);
 int get_command_length(char *command);
 int cust_strlen(char *str_inp);
