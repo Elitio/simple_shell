@@ -1,60 +1,72 @@
 #include "main.h"
 
+
+
+
+
+
+
 /**
- * swap_char - Will swap & and | for non print characters.
- * @input: in put string.
- * @option: characters equivalent ASCII character.
- *
- * Return: Wil return the swapped string.
- */
-
-char *swap_char(char *input, int option)
+ * swap_char - performs character swapping based on the value of
+ * the isZero parameter.
+ * @inp_str: string input parameter
+ * @isZero: int check for zero or non-zero to specify swap type
+ * Return: final swapped string
+  */
+char *swap_char(char *inp_str, int isZero)
 {
-	int i = 0;
+	int ind;
 
-	switch (option)
+	if (isZero == 0)
 	{
-		case 0:
-			while (input[i] != '\0')
+		ind = 0;
+		while (inp_str[ind])
+		{
+			if (inp_str[ind] == '|')
 			{
-				if (input[i] == '|')
-				{
-					if (input[i + 1] != '|')
-					{
-						input[i] = 16;
-					}
-					else
-					{
-						i++;
-					}
-				}
-
-				if (input[i] == '&')
-				{
-					if (input[i + 1] != '&')
-					{
-						input[i] = 12;
-					}
-					else
-					{
-						i++;
-					}
-				}
-				i++;
+				if (inp_str[ind + 1] != '|')
+					inp_str[ind] = 16;
+				else
+					ind++;
 			}
-			break;
 
-		default:
-			while (input[i] != '\0')
+			if (inp_str[ind] == '&')
 			{
-				input[i] = (input[i] == 16 ? '|' : input[i]);
-				input[i] = (input[i] == 12 ? '&' : input[i]);
-				i++;
+				if (inp_str[ind + 1] != '&')
+					inp_str[ind] = 12;
+				else
+					ind++;
 			}
+			ind++;
+		}
 	}
+	else
+	{
+		ind = 0;
+		while (inp_str[ind])
+		{
+			inp_str[ind] = (inp_str[ind] == 16 ? '|'
+					: inp_str[ind]);
+			inp_str[ind] = (inp_str[ind] == 12 ? '&'
+					: inp_str[ind]);
 
-	return (input);
+			ind++;
+		}
+	}
+	return (inp_str);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * add_nodes - add separators and command lines in the lists
@@ -118,7 +130,8 @@ void go_next(sep_list **list_s, line_list **list_l, data_shell *datash)
 	{
 		if (datash->status == 0)
 		{
-			if (current_sep->separator == '&' || current_sep->separator == ';')
+			if (current_sep->separator == '&'
+					|| current_sep->separator == ';')
 			{
 				loop_sep = 0;
 			}
@@ -130,7 +143,8 @@ void go_next(sep_list **list_s, line_list **list_l, data_shell *datash)
 		}
 		else
 		{
-			if (current_sep->separator == '|' || current_sep->separator == ';')
+			if (current_sep->separator == '|' ||
+					current_sep->separator == ';')
 			{
 				loop_sep = 0;
 			}
