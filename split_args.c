@@ -1,5 +1,6 @@
 #include "main.h"
 
+<<<<<<< HEAD
 
 
 
@@ -54,95 +55,180 @@ char *swap_char(char *inp_str, int isZero)
 		}
 	}
 	return (inp_str);
+=======
+/**
+ * add_nodes - parses and adds nodes to 2 linked lists.
+ * @sepHead: pointer to head of separator linked list
+ * @cmdHead: pointer to head of command line linked list
+ * @inp_str: string input parameter
+ * Return: nothing
+ */
+void add_nodes(sep_list **sepHead, line_list **cmdHead, char *inp_str)
+{
+	char *sep_or_delim = ";|&";
+	char *token = _strtok(inp_str, sep_or_delim);
+	char delim;
+
+	inp_str = swap_char(inp_str, 0);
+
+	while (token != NULL)
+	{
+		token = swap_char(token, 1);
+		add_line_node_end(cmdHead, token);
+		delim = inp_str[token - inp_str + _strlen(token)];
+		if (delim == ';' || delim == '|' || delim == '&')
+			add_sep_node_end(sepHead, delim);
+		token = _strtok(NULL, sep_or_delim);
+	}
 }
-
-
-
-
-
-
-
-
-
 
 
 
 
 /**
- * add_nodes - add separators and command lines in the lists
- *
- * @head_s: head of separator list
- * @head_l: head of command lines list
- * @input: input string
- * Return: no return
+ * split_line - splitting a given string (input) into an array
+ * of tokens based on a specified delimiter
+ * @inp_str: string input parameter.
+ * Return:  dynamically allocated array of tokens
  */
-
-void add_nodes(sep_list **head_s, line_list **head_l, char *input)
+char **split_line(char *inp_str)
 {
-	int i = 0;
-	char *line;
+	size_t _sizeBuff = TOK_BUFSIZE;
 
-	input = swap_char(input, 0);
+	size_t cur_ind = 0;
 
-	while (input[i] != '\0')
+	char **toks = malloc(sizeof(char *) * _sizeBuff);
+	char *frst_tok;
+
+	if (toks == NULL)
 	{
-		if (input[i] == ';')
-		{
-			add_sep_node_end(head_s, input[i]);
-			i++;
-		}
-		else if (input[i] == '|' || input[i] == '&')
-		{
-			add_sep_node_end(head_s, input[i]);
-			i += 2;
-		}
-		else
-		{
-			i++;
-		}
+		write(STDERR_FILENO, ": Oops! couldn't allocate memory\n", 32);
+
+		exit(EXIT_FAILURE);
 	}
 
-	line = _strtok(input, ";|&");
-	while (line != NULL)
-	{
-		line = swap_char(line, 1);
-		add_line_node_end(head_l, line);
-		line = _strtok(NULL, ";|&");
-	}
+	do {
+		frst_tok = _strtok(inp_str, TOK_DELIM);
+
+		if (cur_ind == _sizeBuff)
+		{
+			_sizeBuff += TOK_BUFSIZE;
+
+			toks = _reallocdp(toks, cur_ind, sizeof(char *)
+					* _sizeBuff);
+			if (toks == NULL)
+			{
+				write(STDERR_FILENO, ": memory error\n", 14);
+
+				exit(EXIT_FAILURE);
+			}
+		}
+
+		toks[cur_ind++] = frst_tok;
+
+		inp_str = NULL;
+
+	} while (frst_tok != NULL);
+
+	toks[cur_ind] = NULL;
+	return (toks);
+>>>>>>> 8d67054384870aba1c40d42fbe8e4c8164645111
 }
 
+
+
+
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+=======
+>>>>>>> 8d67054384870aba1c40d42fbe8e4c8164645111
 /**
- * go_next - Go to the next command line stored.
- *
- * @list_s: separator lists of args.
- * @list_l: command line lists of args.
- * @datash: customized data structure.
- * Return: void.
+ * go_next - navigate through linked lists of sep_list and line_list nodes
+ * based on the exit status (datash->status) of the previous command execution
+ * @sepHead: Pointer to the head of the sep_list linked list parameter
+ * @cmdHead: Pointer to the head of the line_list linked list.
+ * @shell_data: structure parameter
+ * Return: nothing
  */
-
-void go_next(sep_list **list_s, line_list **list_l, data_shell *datash)
+void go_next(sep_list **sepHead, line_list **cmdHead, data_shell *shell_data)
 {
-	int loop_sep = 1;
-	sep_list *current_sep = *list_s;
-	line_list *current_line = *list_l;
+	int loop = 1, ext_stat;
+	sep_list *tempSepHead = *sepHead;
+	line_list *tempCmdHead = *cmdHead;
 
-	while (current_sep != NULL && loop_sep)
+	while (tempSepHead != NULL && loop)
 	{
-		if (datash->status == 0)
+		ext_stat = (shell_data->status == 0) ? 0 : 1;
+		if ((tempSepHead->separator == '&' && ext_stat == 0) ||
+				(tempSepHead->separator == '|' && ext_stat
+				 == 1))
 		{
+			loop = 0;
+		}
+
+		tempCmdHead = (tempSepHead->separator == '|')
+			? tempCmdHead->next : tempCmdHead;
+		tempSepHead = tempSepHead->next;
+	}
+
+	*sepHead = tempSepHead;
+	*cmdHead = tempCmdHead;
+}
+
+
+/**
+ * swap_char - performs character swapping based on the value of
+ * the isZero parameter.
+ * @inp_str: string input parameter
+ * @isZero: int check for zero or non-zero to specify swap type
+ * Return: final swapped string
+  */
+char *swap_char(char *inp_str, int isZero)
+{
+	int ind;
+
+	if (isZero == 0)
+	{
+		ind = 0;
+		while (inp_str[ind])
+		{
+<<<<<<< HEAD
 			if (current_sep->separator == '&'
 					|| current_sep->separator == ';')
+=======
+			if (inp_str[ind] == '|')
+>>>>>>> 8d67054384870aba1c40d42fbe8e4c8164645111
 			{
-				loop_sep = 0;
+				if (inp_str[ind + 1] != '|')
+					inp_str[ind] = 16;
+				else
+					ind++;
 			}
-			else if (current_sep->separator == '&')
+
+			if (inp_str[ind] == '&')
 			{
-				current_line = current_line->next;
-				current_sep = current_sep->next;
+				if (inp_str[ind + 1] != '&')
+					inp_str[ind] = 12;
+				else
+					ind++;
 			}
+			ind++;
 		}
-		else
+	}
+	else
+	{
+		ind = 0;
+		while (inp_str[ind])
 		{
+<<<<<<< HEAD
 			if (current_sep->separator == '|' ||
 					current_sep->separator == ';')
 			{
@@ -154,131 +240,65 @@ void go_next(sep_list **list_s, line_list **list_l, data_shell *datash)
 				current_sep = current_sep->next;
 			}
 		}
+=======
+			inp_str[ind] = (inp_str[ind] == 16 ? '|' : inp_str[ind]);
+			inp_str[ind] = (inp_str[ind] == 12 ? '&' : inp_str[ind]);
+>>>>>>> 8d67054384870aba1c40d42fbe8e4c8164645111
 
-		if (current_sep != NULL && !loop_sep)
-		{
-			current_sep = current_sep->next;
+			ind++;
 		}
 	}
-
-	*list_s = current_sep;
-	*list_l = current_line;
+	return (inp_str);
 }
+
+
+
+
 
 /**
- * split_commands - Will splits command lines according to
- * the separators ;, | and &, and executes them
- *
- * @datash: data structure
- * @input: input string
- * Return: 0 will exit, 1 to continue.
+ * split_commands - splits and executes multiple commands
+ * separated by separators like ;, |, or &
+ * @shell_data: data structure
+ * @inp_str: string input parameter
+ * Return: 0 to stop executing or 1 to continue executing
+ * more commands.
  */
-
-int split_commands(data_shell *datash, char *input)
+int split_commands(data_shell *shell_data, char *inp_str)
 {
+	sep_list *sepHead = NULL, *tempSepHead;
 
-	sep_list *head_s, *list_s;
+	line_list *cmdHead = NULL, *tempCmdHead;
 
-	line_list *head_l, *list_l;
+	int loop = 1;
 
-	int loop;
-
-
-	head_s = NULL;
-
-	head_l = NULL;
+	add_nodes(&sepHead, &cmdHead, inp_str);
+	tempSepHead = sepHead;
+	tempCmdHead = cmdHead;
 
 
-	add_nodes(&head_s, &head_l, input);
+	do {
+		shell_data->input = tempCmdHead->line;
+
+		shell_data->args = split_line(shell_data->input);
+
+		loop = exec_line(shell_data);
+		free(shell_data->args);
 
 
-	list_s = head_s;
+		go_next(&tempSepHead, &tempCmdHead, shell_data);
 
-	list_l = head_l;
+		if (tempCmdHead)
+			tempCmdHead = tempCmdHead->next;
 
+	} while (tempCmdHead && loop);
 
-	while (list_l != NULL)
-	{
-		datash->input = list_l->line;
-		datash->args = split_line(datash->input);
-		loop = exec_line(datash);
-		free(datash->args);
+	free_sep_list(&sepHead);
 
-		if (loop == 0)
-		{
-			break;
-		}
+	free_line_list(&cmdHead);
 
-		if (datash->status == 0)
-		{
-			if (list_s->separator == ';' || list_s->separator == '|')
-			{
-				go_next(&list_s, &list_l, datash);
-			}
-		}
-		else
-		{
-			if (list_s->separator == '|' || list_s->separator == ';')
-			{
-				go_next(&list_s, &list_l, datash);
-			}
-
-			if (list_l != NULL)
-			{
-				list_l = list_l->next;
-			}
-		}
-
-
-		free_sep_list(&head_s);
-		free_line_list(&head_l);
-
-		if (loop == 0)
-		{
-			return (0);
-		}
-		return (1);
+	return (loop);
 }
 
-/**
- * split_line - tokenizes the input string
- *
- * @input: input string.
- * Return: string splitted.
- */
 
-char **split_line(char *input)
-{
-	size_t bsize = TOK_BUFSIZE;
-	size_t i = 0;
-	char **tokens = malloc(sizeof(char *) * bsize);
 
-	if (tokens == NULL)
-	{
-		write(STDERR_FILENO, ": allocation error\n", 18);
-		exit(EXIT_FAILURE);
-	}
 
-	char *token = strtok(input, TOK_DELIM);
-	tokens[i++] = token;
-
-	while (token != NULL)
-	{
-		if (i == bsize)
-		{
-			bsize += TOK_BUFSIZE;
-			char **temp = realloc(tokens, sizeof(char *) * bsize);
-			if (temp == NULL)
-			{
-				write(STDERR_FILENO, ": allocation error\n", 18);
-				exit(EXIT_FAILURE);
-			}
-			tokens = temp;
-		}
-
-		token = strtok(NULL, TOK_DELIM);
-		tokens[i++] = token;
-	}
-
-	return (tokens);
-}
