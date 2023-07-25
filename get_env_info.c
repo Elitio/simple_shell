@@ -1,32 +1,6 @@
 #include "main.h"
 
 
-
-
-/**
- * cmp_env_name - compare an environment variable's name with name input
- * @env_var_name: the environment variable
- * @name_input: the name to compare with
- * Return: 0 if they are not equal or i + 1
- */
-int cmp_env_name(const char *env_var_name, const char *name_input)
-{
-	int i = 0;
-
-	while (env_var_name[i] && env_var_name[i] != '=' && env_var_name[i]
-			== name_input[i])
-	{
-		i++;
-	}
-
-	return (env_var_name[i] == '=' ? i + 1 : 0);
-}
-
-
-
-
-
-
 /**
  * _getenv - retrieve the value of an environment variable given its name.
  * @name_inp: name of the environment variable to be searched for.
@@ -82,5 +56,24 @@ int _env(data_shell *shell_data)
 
 	shell_data->status = 0;
 	return (1);
+}
+
+/**
+ * cmp_env_name - compare an environment variable's name with name input
+ * @env_var_name: the environment variable
+ * @name_input: the name to compare with
+ * Return: 0 if they are not equal or i + 1
+ */
+int cmp_env_name(const char *env_var_name, const char *name_input)
+{
+	int i = 0;
+
+	while (env_var_name[i] && env_var_name[i] != '=' && env_var_name[i]
+			== name_input[i])
+	{
+		i++;
+	}
+
+	return (env_var_name[i] == '=' ? i + 1 : 0);
 }
 
