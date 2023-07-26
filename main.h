@@ -192,6 +192,7 @@ int cmd_exec(data_shell *datash);
 /* env1.c */
 char *_getenv(const char *name, char **_environ);
 int _env(data_shell *datash);
+int cmp_env_name(const char *env_var_name, const char *name_input);
 
 /* env2.c */
 char *copy_info(char *name, char *value);
