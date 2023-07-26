@@ -211,6 +211,9 @@ int _env(data_shell *shell_data);
 int cmp_env_name(const char *env_var_name, const char *name_input);
 
 
+int exec_line(data_shell *shell_data);
+
+
 
 
 #endif
