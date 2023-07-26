@@ -31,6 +31,27 @@ extern char **environ;
 
 
 
+/**
+ * struct data - Structure with members for keeping program variable data.
+ * @input: This is the command input member.
+ * @av: arguments array to the prgram.
+ * @args: The command line tokens or the comand input
+ * @status: The last status of the shell.
+ * @counter: counter.
+ * @_environ: array of environment variables
+ * @pid: Process ID
+ */
+typedef struct data
+{
+	char **av;
+	char *input;
+	char **args;
+	int status;
+	int counter;
+	char **_environ;
+	char *pid;
+} data_shell;
+
 
 
 /**
@@ -89,26 +110,7 @@ typedef struct r_var_list
 
 
 
-/**
- * struct data - Structure with members for keeping program variable data.
- * @input: This is the command input member.
- * @av: arguments array to the prgram.
- * @args: The command line tokens or the comand input
- * @status: The last status of the shell.
- * @counter: counter.
- * @_environ: array of environment variables
- * @pid: Process ID
- */
-typedef struct data
-{
-	char **av;
-	char *input;
-	char **args;
-	int status;
-	int counter;
-	char **_environ;
-	char *pid;
-} data_shell;
+
 
 
 
