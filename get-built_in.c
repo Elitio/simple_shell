@@ -9,6 +9,8 @@
 
 int (*get_builtin(char *cmd))(data_shell *)
 {
+	int i;
+
 	typedef struct
 	{
 		char *name;
@@ -23,17 +25,12 @@ int (*get_builtin(char *cmd))(data_shell *)
 		{ "setenv", _setenv },
 		{ NULL, NULL }
 	};
-
-
-	int i;
-
 	for (i = 0; builtin[i].name; i++)
 	{
 		if (strcmp(builtin[i].name, cmd) == 0)
 		{
-			break;
+			return (builtins[i].f);
 		}
 	}
-
-	return (builtin[i].f);
+	return (NULL);
 }
