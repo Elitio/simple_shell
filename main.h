@@ -39,13 +39,32 @@ extern char **environ;
 typedef struct data
 {
 	char *input;
+	int status;
+	char *pid;
+	int counter;
 	char **av;
 	char **args;
-	int status;
-	int counter;
 	char **_environ;
-	char *pid;
 } data_shell;
+
+
+
+
+/**
+ * struct r_var_list - single linked list structure
+ * @len_var: variable length
+ * @val: variable value
+ * @len_val: value length
+ * @next: next node of the list
+ */
+typedef struct r_var_list
+{
+	int len_var;
+	char *val;
+	int len_val;
+	struct r_var_list *next;
+} r_var;
+
 
 
 /**
@@ -73,22 +92,6 @@ typedef struct line_list_s
 } line_list;
 
 
-
-
-/**
- * struct r_var_list - single linked list structure
- * @len_var: variable length
- * @val: variable value
- * @len_val: value length
- * @next: next node of the list
- */
-typedef struct r_var_list
-{
-	int len_var;
-	char *val;
-	int len_val;
-	struct r_var_list *next;
-} r_var;
 
 
 
