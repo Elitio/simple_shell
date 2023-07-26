@@ -1,61 +1,55 @@
 #ifndef _MAIN_
 #define _MAIN_
 
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
 #include <errno.h>
+#include <fcntl.h>
+#include <signal.h>
 #include <limits.h>
 #include <stddef.h>
-#include <sys/wait.h>
-#include <stdio.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <signal.h>
 
 
 
-
-#define TOK_DELIM " \t\r\n\a"
 
 #define BUFSIZE 1024
-
-
-
-
-
-
 #define TOK_BUFSIZE 128
+#define TOK_DELIM " \t\r\n\a"
 
-
-
-
-
+/* Points to an array of pointers to strings called the "environment" */
 extern char **environ;
 
 
-
-
-
-
-
 /**
- * struct line_list_s - a single linked list structure
- * @line: command line variable
- * @next: next node of the list
+ * struct data - struct that contains all relevant data on runtime
+ * @av: argument vector
+ * @input: command line written by the user
+ * @args: tokens of the command line
+ * @status: last status of the shell
+ * @counter: lines counter
+ * @_environ: environment variable
+ * @pid: process ID of the shell
  */
-typedef struct line_list_s
+typedef struct data
 {
-	char *line;
-	struct line_list_s *next;
-} line_list;
-
-
+	char **av;
+	char *input;
+	char **args;
+	int status;
+	int counter;
+	char **_environ;
+	char *pid;
+} data_shell;
 
 /**
- * struct sep_list_s - a singly linked list structure
- * @separator: separator
- * @next: next node of the list
+ * struct sep_list_s - single linked list
+ * @separator: ; | &
+ * @next: next node
+ * Description: single linked list to store separators
  */
 typedef struct sep_list_s
 {
@@ -63,37 +57,25 @@ typedef struct sep_list_s
 	struct sep_list_s *next;
 } sep_list;
 
-
-
-
-
-
-
-
-
-
-
 /**
- * struct builtin_s - Builtin structure for command arguments.
- * @name: command builtin name
- * @f: pointer func of data type
+ * struct line_list_s - single linked list
+ * @line: command line
+ * @next: next node
+ * Description: single linked list to store command lines
  */
-typedef struct builtin_s
+typedef struct line_list_s
 {
-	char *name;
-	int (*f)(data_shell *datash);
-} builtin_t;
-
-
-
-
+	char *line;
+	struct line_list_s *next;
+} line_list;
 
 /**
- * struct r_var_list - single linked list structure
- * @len_var: variable length
- * @val: variable value
- * @len_val: value length
- * @next: next node of the list
+ * struct r_var_list - single linked list
+ * @len_var: length of the variable
+ * @val: value of the variable
+ * @len_val: length of the value
+ * @next: next node
+ * Description: single linked list to store variables
  */
 typedef struct r_var_list
 {
@@ -103,32 +85,16 @@ typedef struct r_var_list
 	struct r_var_list *next;
 } r_var;
 
-
 /**
- * struct data - Structure with members for keeping program variable data.
- * @input: This is the command input member.
- * @av: arguments array to the prgram.
- * @args: The command line tokens or the comand input
- * @status: The last status of the shell.
- * @counter: counter.
- * @_environ: array of environment variables
- * @pid: Process ID
+ * struct builtin_s - Builtin struct for command args.
+ * @name: The name of the command builtin i.e cd, exit, env
+ * @f: data type pointer function.
  */
-
-typedef struct data
+typedef struct builtin_s
 {
-	
-	char *input;
-	char **args;
-	int status;
-	char **av;
-	int counter;
-	char **_environ;
-	char *pid;
-} data_shell;
-
-
-
+	char *name;
+	int (*f)(data_shell *datash);
+} builtin_t;
 
 /* new functions added */
 int get_value_length(char *value);
@@ -226,7 +192,6 @@ int cmd_exec(data_shell *datash);
 /* env1.c */
 char *_getenv(const char *name, char **_environ);
 int _env(data_shell *datash);
-int cmp_env_name(const char *nenv, const char *name);
 
 /* env2.c */
 char *copy_info(char *name, char *value);
