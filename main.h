@@ -40,7 +40,7 @@ typedef struct data
 {
 	char *input;
 	char **av;
-	char args;
+	char **args;
 	int status;
 	int counter;
 	char **_environ;
