@@ -11,12 +11,6 @@ int (*get_builtin(char *cmd))(data_shell *)
 {
 	int i;
 
-	typedef struct
-	{
-		char *name;
-		int (*f)(data_shell *);
-	} builtin_t;
-
 	builtin_t builtin[] = {
 		{ "unsetenv", _unsetenv },
 		{ "cd", cd_shell },
