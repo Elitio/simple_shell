@@ -48,7 +48,16 @@ typedef struct data
 } data_shell;
 
 
-
+/**
+ * struct sep_list_s - a singly linked list structure
+ * @separator: separator
+ * @next: next node of the list
+ */
+typedef struct sep_list_s
+{
+	char separator;
+	struct sep_list_s *next;
+} sep_list;
 
 
 
@@ -64,30 +73,7 @@ typedef struct line_list_s
 } line_list;
 
 
-/**
- * struct sep_list_s - a singly linked list structure
- * @separator: separator
- * @next: next node of the list
- */
-typedef struct sep_list_s
-{
-	char separator;
-	struct sep_list_s *next;
-} sep_list;
 
-
-
-
-/**
- * struct builtin_s - Builtin structure for command arguments.
- * @name: command builtin name
- * @f: pointer func of data type
- */
-typedef struct builtin_s
-{
-	char *name;
-	int (*f)(data_shell *shell_data);
-} builtin_t;
 
 /**
  * struct r_var_list - single linked list structure
@@ -105,6 +91,18 @@ typedef struct r_var_list
 } r_var;
 
 
+
+
+/**
+ * struct builtin_s - Builtin structure for command arguments.
+ * @name: command builtin name
+ * @f: pointer func of data type
+ */
+typedef struct builtin_s
+{
+	char *name;
+	int (*f)(data_shell *shell_data);
+} builtin_t;
 
 
 
