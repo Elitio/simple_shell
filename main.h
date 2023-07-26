@@ -103,8 +103,6 @@ typedef struct data
 
 
 
-int (*get_builtin(char *cmd))(data_shell *);
-
 /*function edits */
 int check_error_cmd(char *direct, data_shell *shell_data);
 char *_which(char *inp_cmd, char **_environ);
@@ -122,6 +120,7 @@ char **split_line(char *inp_str);
 void go_next(sep_list **sepHead, line_list **cmdHead, data_shell *shell_data);
 char *swap_char(char *inp_str, int isZero);
 int split_commands(data_shell *shell_data, char *inp_str);
+int (*get_builtin(char *cmd))(data_shell *);
 
 
 
