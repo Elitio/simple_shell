@@ -44,5 +44,5 @@ void shell_loop(data_shell *data_shell_info)
 			count = 0;
 			free(user_input);
 		}
-	} while (counter == 1);
+	} while (count == 1);
 }
