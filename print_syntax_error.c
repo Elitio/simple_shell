@@ -11,7 +11,7 @@
 void print_syntax_error(data_shell *shell_data, char *inp_str, int ind,
 		int isSingle)
 {
-	char *char_holder = NULL, *err1_msg = ": error: \"";
+	char *char_holder = NULL, *err1_msg = ": not found\n";
 	char *err2_msg = "\" caused error\n", *err_full;
 	char *cmdNum = aux_itoa(shell_data->counter);
 	int err_len;

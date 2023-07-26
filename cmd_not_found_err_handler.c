@@ -9,7 +9,7 @@
 char *error_not_found(data_shell *shell_data)
 {
 	char *prg_ver_str = aux_itoa(shell_data->counter);
-	char *err_str_msg = ": Oops! Command was not found\n";
+	char *err_str_msg = ": not found\n";
 
 	int index = 0;
 	int i;
