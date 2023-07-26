@@ -81,7 +81,7 @@ typedef struct sep_list_s
 typedef struct builtin_s
 {
 	char *name;
-	int (*f)(data_shell *shell_data);
+	int (*f)(data_shell *datash);
 } builtin_t;
 
 
@@ -117,10 +117,11 @@ typedef struct r_var_list
 
 typedef struct data
 {
+	
 	char *input;
-	char **av;
-	char args;
+	char **args;
 	int status;
+	char **av;
 	int counter;
 	char **_environ;
 	char *pid;
