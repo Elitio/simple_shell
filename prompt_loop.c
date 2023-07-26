@@ -36,7 +36,7 @@ void shell_loop(data_shell *data_shell_info)
 
 			user_input = rep_var(user_input, data_shell_info);
 			count = split_commands(data_shell_info, user_input);
-			data_shell_info->count += 1;
+			data_shell_info->counter += 1;
 			free(user_input);
 		}
 		else
