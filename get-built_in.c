@@ -7,6 +7,7 @@
  * Return: Function pointer of the built-in command.
  */
 
+
 int (*get_builtin(char *cmd))(data_shell *)
 {
 	int i;
@@ -19,12 +20,25 @@ int (*get_builtin(char *cmd))(data_shell *)
 		{ "setenv", _setenv },
 		{ NULL, NULL }
 	};
+
+	if (cmd == NULL || *cmd == '\0')
+	{
+
+		return (NULL);
+	}
+
 	for (i = 0; builtin[i].name; i++)
 	{
-		if (_strcmp(builtin[i].name, cmd) == 0)
+		if (builtin[i].name != NULL && _strcmp(builtin[i].name,
+					cmd) == 0)
 		{
 			return (builtin[i].f);
 		}
 	}
+
 	return (NULL);
 }
+
+
+
+

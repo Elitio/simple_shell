@@ -154,8 +154,10 @@ char *swap_char(char *inp_str, int isZero)
 		ind = 0;
 		while (inp_str[ind])
 		{
-			inp_str[ind] = (inp_str[ind] == 16 ? '|' : inp_str[ind]);
-			inp_str[ind] = (inp_str[ind] == 12 ? '&' : inp_str[ind]);
+			inp_str[ind] = (inp_str[ind] == 16 ? '|'
+					: inp_str[ind]);
+			inp_str[ind] = (inp_str[ind] == 12 ? '&'
+					: inp_str[ind]);
 
 			ind++;
 		}
@@ -175,10 +177,10 @@ char *swap_char(char *inp_str, int isZero)
  * Return: 0 to stop executing or 1 to continue executing
  * more commands.
  */
+
 int split_commands(data_shell *shell_data, char *inp_str)
 {
 	sep_list *sepHead = NULL, *tempSepHead;
-
 	line_list *cmdHead = NULL, *tempCmdHead;
 
 	int loop = 1;
@@ -187,8 +189,10 @@ int split_commands(data_shell *shell_data, char *inp_str)
 	tempSepHead = sepHead;
 	tempCmdHead = cmdHead;
 
-
 	do {
+		if (tempCmdHead == NULL)
+			break;
+
 		shell_data->input = tempCmdHead->line;
 
 		shell_data->args = split_line(shell_data->input);
@@ -196,17 +200,16 @@ int split_commands(data_shell *shell_data, char *inp_str)
 		loop = exec_line(shell_data);
 		free(shell_data->args);
 
-
 		go_next(&tempSepHead, &tempCmdHead, shell_data);
 
 		if (tempCmdHead)
 			tempCmdHead = tempCmdHead->next;
 
-	} while (tempCmdHead && loop);
+	} while (loop);
 
 	free_sep_list(&sepHead);
-
 	free_line_list(&cmdHead);
 
 	return (loop);
 }
+

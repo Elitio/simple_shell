@@ -13,13 +13,15 @@
  * and 0 if both strings are equal.
  */
 
+
+
 int _strcmp(char *first_str, char *second_str)
 {
 	int count = 0;
 	int result = 0;
 
-	while (first_str[count] == second_str[count] &&
-			first_str[count] != '\0')
+	while (first_str[count] != '\0' && second_str[count] != '\0' &&
+			first_str[count] == second_str[count])
 	{
 		count++;
 	}
