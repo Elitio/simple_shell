@@ -29,7 +29,7 @@ int (*get_builtin(char *cmd))(data_shell *)
 	{
 		if (_strcmp(builtin[i].name, cmd) == 0)
 		{
-			return (builtins[i].f);
+			return (builtin[i].f);
 		}
 	}
 	return (NULL);
