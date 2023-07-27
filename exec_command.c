@@ -150,8 +150,6 @@ int cmd_exec(data_shell *shell_data)
 
 
 
-
-
 /**
  * is_cdir - check if the character at the current position in
  * the given path string is a colon (':').

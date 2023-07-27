@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <signal.h>
-
+#include <string.h>
 
 #define BUFSIZE 1024
 #define TOK_BUFSIZE 128

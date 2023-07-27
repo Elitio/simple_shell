@@ -14,7 +14,6 @@ void shell_loop(data_shell *data_shell_info)
 
 	do {
 		write(STDOUT_FILENO, "$ ", 2);
-
 		user_input = read_line(&the_end_of_file);
 		if (the_end_of_file != -1)
 		{
@@ -39,15 +38,12 @@ void shell_loop(data_shell *data_shell_info)
 			user_input = rep_var(user_input, data_shell_info);
 			count = split_commands(data_shell_info, user_input);
 			data_shell_info->counter += 1;
-			free(user_input);
 		}
 		else
 		{
 			count = 0;
-			free(user_input);
 		}
+		free(user_input);
 	} while (count == 1);
 }
-
-
 
