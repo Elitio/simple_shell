@@ -120,13 +120,10 @@ int cmd_exec(data_shell *shell_data)
 	child_id = fork();
 	if (child_id == 0)
 	{
-		if (cmd_check == 0)
-			cmd_path = _which(shell_data->args[0],
-					shell_data->_environ);
-		else
-			cmd_path = shell_data->args[0];
 		execve(cmd_path + cmd_check, shell_data->args,
 				shell_data->_environ);
+		perror("_which");
+		_exit(127);
 	}
 	else if (child_id < 0)
 	{
@@ -140,7 +137,6 @@ int cmd_exec(data_shell *shell_data)
 	shell_data->status = WIFEXITED(chExtStat) ? WEXITSTATUS(chExtStat) : 1;
 	return (1);
 }
-
 
 
 
