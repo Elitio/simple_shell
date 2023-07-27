@@ -57,7 +57,7 @@ char *_which(char *inp_cmd, char **_environ)
 	path_copy = _strdup(str_path);
 	if (!path_copy)
 		return (NULL);
-	tokPath = _strtok(path_copy, ":");
+	tokPath = strtok(path_copy, ":");
 	while (tokPath)
 	{
 		dirLen = _strlen(tokPath);
@@ -78,7 +78,7 @@ char *_which(char *inp_cmd, char **_environ)
 			return (direct);
 		}
 		free(direct);
-		tokPath = _strtok(NULL, ":");
+		tokPath = strtok(NULL, ":");
 	}
 	free(path_copy);
 	return (NULL);

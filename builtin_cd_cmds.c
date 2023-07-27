@@ -34,9 +34,9 @@ void cd_dot(data_shell *shell_data)
 	}
 	tok_dir = copied_current_dir;
 	rev_string(tok_dir);
-	tok_dir = _strtok(tok_dir, "/");
+	tok_dir = strtok(tok_dir, "/");
 	if (tok_dir != NULL)
-		tok_dir = _strtok(NULL, "\0");
+		tok_dir = strtok(NULL, "\0");
 	if (tok_dir != NULL)
 	{
 		chdir(tok_dir);

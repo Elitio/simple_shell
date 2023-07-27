@@ -99,7 +99,7 @@ void set_env(char *env_name, char *env_value, data_shell *shell_data)
 	while (environ_var[count])
 	{
 		check_env_var = _strdup(environ_var[count]);
-		env_name_check = _strtok(check_env_var, "=");
+		env_name_check = strtok(check_env_var, "=");
 
 		found_match = (_strcmp(env_name_check, env_name) == 0);
 		if (found_match)
