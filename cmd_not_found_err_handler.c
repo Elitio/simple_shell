@@ -16,6 +16,12 @@ char *error_not_found(data_shell *shell_data)
 	int buff_len = _strlen(shell_data->av[0]) + get_len(shell_data->counter)
 		+ _strlen(shell_data->args[0]) + 16;
 	char *err_str = malloc(sizeof(char) * (buff_len + 1));
+	
+	if (access(shell_data->args[0], X_OK) == -1)
+	{
+		write(STDERR_FILENO, "No such file or directory\n", sizeof("No such file or directory\n"));
+		_exit(EXIT_FAILURE);
+	}
 
 	if (err_str == NULL)
 	{
