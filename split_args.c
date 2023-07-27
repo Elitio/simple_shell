@@ -10,7 +10,7 @@
 void add_nodes(sep_list **sepHead, line_list **cmdHead, char *inp_str)
 {
 	char *sep_or_delim = ";|&";
-	char *token = strtok(inp_str, sep_or_delim);
+	char *token = _strtok(inp_str, sep_or_delim);
 	char delim;
 
 	inp_str = swap_char(inp_str, 0);
@@ -22,7 +22,7 @@ void add_nodes(sep_list **sepHead, line_list **cmdHead, char *inp_str)
 		delim = inp_str[token - inp_str + _strlen(token)];
 		if (delim == ';' || delim == '|' || delim == '&')
 			add_sep_node_end(sepHead, delim);
-		token = strtok(NULL, sep_or_delim);
+		token = _strtok(NULL, sep_or_delim);
 	}
 }
 
@@ -52,7 +52,7 @@ char **split_line(char *inp_str)
 	}
 
 	do {
-		frst_tok = strtok(inp_str, TOK_DELIM);
+		frst_tok = _strtok(inp_str, TOK_DELIM);
 
 		if (cur_ind == _sizeBuff)
 		{

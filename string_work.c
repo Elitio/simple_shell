@@ -36,13 +36,13 @@ int cmp_chars(char string[], const char *delim)
 
 
 /**
- * strtok - splits string into tokens based on a set of delimiter characters
+ * _strtok - splits string into tokens based on a set of delimiter characters
  * @string: input string.
  * @delim: delimiter.
  *
  * Return: tokenized string.
  */
-char *strtok(char string[], const char *delim)
+char *_strtok(char string[], const char *delim)
 {
 	static char *token;
 	unsigned int count, delim_checker;

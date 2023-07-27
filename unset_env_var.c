@@ -25,7 +25,7 @@ int _unsetenv(data_shell *shell_data)
 	while (shell_data->_environ[ind])
 	{
 		env_var_check = _strdup(shell_data->_environ[ind]);
-		env_name_check = strtok(env_var_check, "=");
+		env_name_check = _strtok(env_var_check, "=");
 
 		if (_strcmp(env_name_check, shell_data->args[1]) == 0)
 		{
