@@ -224,7 +224,7 @@ int cd_shell(data_shell *data_shell)
 	spec_delta = 0;
 	spec_doubdash = 0;
 	if (_strcmp("$HOME", directory) == spec_home ||
-		_strcmp("~", directory) == spec_delta || 
+		_strcmp("~", directory) == spec_delta ||
 		_strcmp("--", directory) == spec_doubdash)
 	{
 		cd_to_home(data_shell);
