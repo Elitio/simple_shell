@@ -85,7 +85,6 @@ void cd_previous(data_shell *shell_data)
 			break;
 	}
 	set_env("OLDPWD", copied_current_dir, shell_data);
-
 	switch (chdir(copied_prev_dir))
 	{
 		case 0:
@@ -96,15 +95,13 @@ void cd_previous(data_shell *shell_data)
 			break;
 	}
 	new_current_dir = _getenv("PWD", shell_data->_environ);
-
 	write(STDOUT_FILENO, new_current_dir, _strlen(new_current_dir));
 	write(STDOUT_FILENO, "\n", 1);
 	free(copied_current_dir);
-
 	if (prev_dir)
 		free(copied_prev_dir);
-
 	shell_data->status = 0;
+	chdir(new_current_dir);
 }
 
 
