@@ -43,6 +43,7 @@ char *error_get_cd(data_shell *shell_data)
 		_strcat(err_str_ptr, shell_data->args[1]);
 	}
 	_strcat(err_str_ptr, shell_data->args[1]);
+	_strcat(err_str_ptr, "\n");
 	_strcat(err_str_ptr, "\0");
 	free(prg_ver_str);
 	return (err_str_ptr);
