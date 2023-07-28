@@ -215,20 +215,22 @@ int cd_shell(data_shell *data_shell)
 
 	directory = data_shell->args[1];
 
-
 	if (directory == NULL)
 	{
 		cd_to_home(data_shell);
 		return (success);
 	}
-
-	spec_home = _strcmp("$HOME", directory);
-
-	spec_delta = _strcmp("~", directory);
-
-	spec_doubdash = _strcmp("--", directory);
-
-	if (spec_home || spec_delta || spec_doubdash)
+	spec_home = 0;
+	spec_delta = 0;
+	spec_doubdash = 0;
+	if (_strcmp("$HOME", directory) == spec_home ||
+		_strcmp("~", directory) == spec_delta || 
+		_strcmp("--", directory) == spec_doubdash)
+	{
+		cd_to_home(data_shell);
+		return (success);
+	}
+	else
 	{
 		if (_strcmp("-", directory) == 0)
 		{
@@ -236,16 +238,13 @@ int cd_shell(data_shell *data_shell)
 
 			return (success);
 		}
-	}
-
-	if (_strcmp(".", directory) == 0 || _strcmp("..", directory) == 0)
-	{
-		cd_dot(data_shell);
-
+		if (_strcmp(".", directory) == 0 || _strcmp("..", directory) == 0)
+		{
+			cd_dot(data_shell);
+			return (success);
+		}
+		cd_to(data_shell);
 		return (success);
 	}
-
-	cd_to(data_shell);
-		return (success);
 }
 
