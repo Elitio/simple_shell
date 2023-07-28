@@ -101,7 +101,6 @@ void cd_previous(data_shell *shell_data)
 	if (prev_dir)
 		free(copied_prev_dir);
 	shell_data->status = 0;
-	chdir(new_current_dir);
 }
 
 
