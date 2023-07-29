@@ -22,7 +22,7 @@ char *error_exit_shell(data_shell *shell_data)
 		cmd_len++;
 	while (shell_data->args[1][arg_len])
 		arg_len++;
-	err_msg_len = prog_len + prg_ver_len + cmd_len + arg_len + 23;
+	err_msg_len = prog_len + prg_ver_len + cmd_len + arg_len + 26;
 	err_str = malloc(sizeof(char) * (err_msg_len + 1));
 	if (err_str == NULL)
 	{
