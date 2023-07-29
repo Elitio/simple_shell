@@ -10,7 +10,7 @@ char *error_exit_shell(data_shell *shell_data)
 {
 	char *ver_str = aux_itoa(shell_data->counter);
 	int av_len = _strlen(shell_data->av[0]);
-	char *error_pt, *errorMs;
+	char *error_ptr, *errorMs;
 	int ver_len = _strlen(ver_str);
 	int arg0_len = _strlen(shell_data->args[0]);
 	int arg1_len = _strlen(shell_data->args[1]);
