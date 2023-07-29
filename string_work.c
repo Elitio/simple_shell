@@ -2,14 +2,14 @@
 
 
 /**
- * cmp_chars - determines if all characters in the input string
+ * charCmpF - determines if all characters in the input string
  * match any characters in the delimiter string
  * @string: input string parameter
  * @delim: delimiter string
  *
  * Return: true if all characters match or false otherwise.
  */
-int cmp_chars(char string[], const char *delim)
+int charCmpF(char string[], const char *delim)
 {
 	int isMatch;
 	int i, j;
@@ -36,13 +36,13 @@ int cmp_chars(char string[], const char *delim)
 
 
 /**
- * _strtok - splits string into tokens based on a set of delimiter characters
+ * tokStrF - splits string into tokens based on a set of delimiter characters
  * @string: input string.
  * @delim: delimiter.
  *
  * Return: tokenized string.
  */
-char *_strtok(char string[], const char *delim)
+char *tokStrF(char string[], const char *delim)
 {
 	static char *token;
 	unsigned int count, delim_checker;
@@ -52,10 +52,10 @@ char *_strtok(char string[], const char *delim)
 
 	if (string != NULL)
 	{
-		if (cmp_chars(string, delim))
+		if (charCmpF(string, delim))
 			return (NULL);
 		token = string;
-		count = _strlen(string);
+		count = lenStrF(string);
 		end_of_str = &string[count];
 	}
 	start_of_str = token;
@@ -86,11 +86,11 @@ char *_strtok(char string[], const char *delim)
 
 
 /**
- * _strdup - duplicates a string.
+ * dupStrF - duplicates a string.
  * @string: string to be duplicated
  * Return: string duplicate
  */
-char *_strdup(const char *string)
+char *dupStrF(const char *string)
 {
 
 	char *duplicate, *copy;
@@ -130,11 +130,11 @@ char *_strdup(const char *string)
 
 
 /**
- * _strlen - calculates and returns the length of the input string
+ * lenStrF - calculates and returns the length of the input string
  * @string: input string parameter
  * Return: length of the input string
  */
-int _strlen(const char *string)
+int lenStrF(const char *string)
 {
 	int length = 0;
 

@@ -18,16 +18,16 @@ int _unsetenv(data_shell *shell_data)
 
 	if (!shell_data->args[1])
 	{
-		get_error(shell_data, -1);
+		getErrorF(shell_data, -1);
 		return (1);
 	}
 
 	while (shell_data->_environ[ind])
 	{
-		env_var_check = _strdup(shell_data->_environ[ind]);
-		env_name_check = _strtok(env_var_check, "=");
+		env_var_check = dupStrF(shell_data->_environ[ind]);
+		env_name_check = tokStrF(env_var_check, "=");
 
-		if (_strcmp(env_name_check, shell_data->args[1]) == 0)
+		if (cpmStrF(env_name_check, shell_data->args[1]) == 0)
 		{
 			free(shell_data->_environ[ind]);
 

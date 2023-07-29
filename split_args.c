@@ -1,28 +1,28 @@
 #include "main.h"
 
 /**
- * add_nodes - parses and adds nodes to 2 linked lists.
+ * plusNode - parses and adds nodes to 2 linked lists.
  * @sepHead: pointer to head of separator linked list
  * @cmdHead: pointer to head of command line linked list
  * @inp_str: string input parameter
  * Return: nothing
  */
-void add_nodes(sep_list **sepHead, line_list **cmdHead, char *inp_str)
+void plusNode(sep_list **sepHead, line_list **cmdHead, char *inp_str)
 {
 	char *sep_or_delim = ";|&";
-	char *token = _strtok(inp_str, sep_or_delim);
+	char *token = tokStrF(inp_str, sep_or_delim);
 	char delim;
 
-	inp_str = swap_char(inp_str, 0);
+	inp_str = chSwap(inp_str, 0);
 
 	while (token != NULL)
 	{
-		token = swap_char(token, 1);
+		token = chSwap(token, 1);
 		add_line_node_end(cmdHead, token);
-		delim = inp_str[token - inp_str + _strlen(token)];
+		delim = inp_str[token - inp_str + lenStrF(token)];
 		if (delim == ';' || delim == '|' || delim == '&')
 			add_sep_node_end(sepHead, delim);
-		token = _strtok(NULL, sep_or_delim);
+		token = tokStrF(NULL, sep_or_delim);
 	}
 }
 
@@ -30,14 +30,14 @@ void add_nodes(sep_list **sepHead, line_list **cmdHead, char *inp_str)
 
 
 /**
- * split_line - splitting a given string (input) into an array
+ * splitIn - splitting a given string (input) into an array
  * of tokens based on a specified delimiter
  * @inp_str: string input parameter.
  * Return:  dynamically allocated array of tokens
  */
-char **split_line(char *inp_str)
+char **splitIn(char *inp_str)
 {
-	size_t _sizeBuff = TOK_BUFSIZE;
+	size_t _sizeBuff = TOK_SIZE_OFBUF;
 
 	size_t cur_ind = 0;
 
@@ -52,13 +52,13 @@ char **split_line(char *inp_str)
 	}
 
 	do {
-		frst_tok = _strtok(inp_str, TOK_DELIM);
+		frst_tok = tokStrF(inp_str, DEL_TOKEN);
 
 		if (cur_ind == _sizeBuff)
 		{
-			_sizeBuff += TOK_BUFSIZE;
+			_sizeBuff += TOK_SIZE_OFBUF;
 
-			toks = _reallocdp(toks, cur_ind, sizeof(char *)
+			toks = reallocDpF(toks, cur_ind, sizeof(char *)
 					* _sizeBuff);
 			if (toks == NULL)
 			{
@@ -82,14 +82,14 @@ char **split_line(char *inp_str)
 
 
 /**
- * go_next - navigate through linked lists of sep_list and line_list nodes
+ * nxtFunc - navigate through linked lists of sep_list and line_list nodes
  * based on the exit status (datash->status) of the previous command execution
  * @sepHead: Pointer to the head of the sep_list linked list parameter
  * @cmdHead: Pointer to the head of the line_list linked list.
  * @shell_data: structure parameter
  * Return: nothing
  */
-void go_next(sep_list **sepHead, line_list **cmdHead, data_shell *shell_data)
+void nxtFunc(sep_list **sepHead, line_list **cmdHead, data_shell *shell_data)
 {
 	int loop = 1, ext_stat;
 	sep_list *tempSepHead = *sepHead;
@@ -116,13 +116,13 @@ void go_next(sep_list **sepHead, line_list **cmdHead, data_shell *shell_data)
 
 
 /**
- * swap_char - performs character swapping based on the value of
+ * chSwap - performs character swapping based on the value of
  * the isZero parameter.
  * @inp_str: string input parameter
  * @isZero: int check for zero or non-zero to specify swap type
  * Return: final swapped string
   */
-char *swap_char(char *inp_str, int isZero)
+char *chSwap(char *inp_str, int isZero)
 {
 	int ind;
 
@@ -170,7 +170,7 @@ char *swap_char(char *inp_str, int isZero)
 
 
 /**
- * split_commands - splits and executes multiple commands
+ * spltCmdFunc - splits and executes multiple commands
  * separated by separators like ;, |, or &
  * @shell_data: data structure
  * @inp_str: string input parameter
@@ -178,14 +178,14 @@ char *swap_char(char *inp_str, int isZero)
  * more commands.
  */
 
-int split_commands(data_shell *shell_data, char *inp_str)
+int spltCmdFunc(data_shell *shell_data, char *inp_str)
 {
 	sep_list *sepHead = NULL, *tempSepHead;
 	line_list *cmdHead = NULL, *tempCmdHead;
 
 	int loop = 1;
 
-	add_nodes(&sepHead, &cmdHead, inp_str);
+	plusNode(&sepHead, &cmdHead, inp_str);
 	tempSepHead = sepHead;
 	tempCmdHead = cmdHead;
 
@@ -195,12 +195,12 @@ int split_commands(data_shell *shell_data, char *inp_str)
 
 		shell_data->input = tempCmdHead->line;
 
-		shell_data->args = split_line(shell_data->input);
+		shell_data->args = splitIn(shell_data->input);
 
 		loop = exec_line(shell_data);
 		free(shell_data->args);
 
-		go_next(&tempSepHead, &tempCmdHead, shell_data);
+		nxtFunc(&tempSepHead, &tempCmdHead, shell_data);
 
 		if (tempCmdHead)
 			tempCmdHead = tempCmdHead->next;

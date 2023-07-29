@@ -4,18 +4,18 @@
 
 
 /**
- * error_path_126 - generates an error message with details about a command
+ * error126F - generates an error message with details about a command
  * that could not be executed due to permission denied
  * @shell_data: data relevant (counter, arguments).
  *
  * Return: error message
  */
-char *error_path_126(data_shell *shell_data)
+char *error126F(data_shell *shell_data)
 {
 	char *error_perm_msg = "Permission access failure";
-	char *perm_er_str = aux_itoa(shell_data->counter);
-	int buff_len = _strlen(shell_data->av[0]) + _strlen(perm_er_str)
-		+ _strlen(shell_data->args[0]) + _strlen(error_perm_msg) + 4;
+	char *perm_er_str = intToStrF(shell_data->counter);
+	int buff_len = lenStrF(shell_data->av[0]) + lenStrF(perm_er_str)
+		+ lenStrF(shell_data->args[0]) + lenStrF(error_perm_msg) + 4;
 	char *error_str = malloc(sizeof(char) * (buff_len + 1));
 	int count = 0, count_2 = 0;
 

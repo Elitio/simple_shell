@@ -6,13 +6,13 @@
 
 
 /**
- * aux_itoa - converts an integer to a string representation.
+ * intToStrF - converts an integer to a string representation.
  * @inp_int: integer parameter
  * Return: resulting string.
  */
-char *aux_itoa(int inp_int)
+char *intToStrF(int inp_int)
 {
-	int length = get_len(inp_int);
+	int length = lenGetF(inp_int);
 	char *result_str;
 	unsigned int num;
 
@@ -46,11 +46,11 @@ char *aux_itoa(int inp_int)
 
 
 /**
- * _atoi - convert a string containing digits into an integer.
+ * csAtoiF - convert a string containing digits into an integer.
  * @str_wth_digs: input string parameter.
  * Return: resulting integer.
  */
-int _atoi(char *str_wth_digs)
+int csAtoiF(char *str_wth_digs)
 {
 	int result = 0;
 	int chck_sign = 1;
@@ -73,12 +73,12 @@ int _atoi(char *str_wth_digs)
 
 
 /**
- * get_len - calculate the length of an integer
+ * lenGetF - calculate the length of an integer
  * @inp_int:  int parameter
  * Return: length of integer
  */
 
-int get_len(int inp_int)
+int lenGetF(int inp_int)
 {
 	int length = 1;
 	unsigned int num;

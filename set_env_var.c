@@ -14,7 +14,7 @@ int _setenv(data_shell *shell_data)
 	do {
 		if (input_cmds_array[1] == NULL || input_cmds_array[2] == NULL)
 		{
-			get_error(shell_data, -1);
+			getErrorF(shell_data, -1);
 			return (1);
 		}
 
@@ -89,7 +89,7 @@ char *copy_info(char *env_name, char *env_value)
  */
 void set_env(char *env_name, char *env_value, data_shell *shell_data)
 {
-	char *check_env_var;
+	char *chkEnvF_var;
 	int count = 0;
 	char *env_name_check;
 	int found_match, env_len;
@@ -98,25 +98,25 @@ void set_env(char *env_name, char *env_value, data_shell *shell_data)
 
 	while (environ_var[count])
 	{
-		check_env_var = _strdup(environ_var[count]);
-		env_name_check = _strtok(check_env_var, "=");
+		chkEnvF_var = dupStrF(environ_var[count]);
+		env_name_check = tokStrF(chkEnvF_var, "=");
 
-		found_match = (_strcmp(env_name_check, env_name) == 0);
+		found_match = (cpmStrF(env_name_check, env_name) == 0);
 		if (found_match)
 		{
 			free(environ_var[count]);
 			environ_var[count] = copy_info(env_name_check,
 					env_value);
-			free(check_env_var);
+			free(chkEnvF_var);
 			return;
 		}
 
-		free(check_env_var);
+		free(chkEnvF_var);
 
 		count++;
 	}
 	env_len = count;
-	environ_var = _reallocdp(environ_var, env_len, sizeof(char *)
+	environ_var = reallocDpF(environ_var, env_len, sizeof(char *)
 			* (env_len + 2));
 	environ_var[env_len] = copy_info(env_name, env_value);
 	environ_var[env_len + 1] = NULL;

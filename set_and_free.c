@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * set_data - sets info of structure members
+ * setDataF - sets info of structure members
  *
  * @shell_data: structure parameter
  * @arg_vector: argument vector parameter
  * Return: nothing
  */
-void set_data(data_shell *shell_data, char **arg_vector)
+void setDataF(data_shell *shell_data, char **arg_vector)
 {
 
 	unsigned int counter = 0;
@@ -31,24 +31,24 @@ void set_data(data_shell *shell_data, char **arg_vector)
 
 	while (environ[counter])
 	{
-		shell_data->_environ[counter] = _strdup(environ[counter]);
+		shell_data->_environ[counter] = dupStrF(environ[counter]);
 		counter++;
 	}
 
 	shell_data->_environ[counter] = NULL;
-	shell_data->pid = aux_itoa(getpid());
+	shell_data->pid = intToStrF(getpid());
 }
 
 
 
 
 /**
- * free_data - frees data structure
+ * freeDataF - frees data structure
  *
  * @shell_data: structure parameter
  * Return: nothing
  */
-void free_data(data_shell *shell_data)
+void freeDataF(data_shell *shell_data)
 {
 	unsigned int counter_var = 0;
 

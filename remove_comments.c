@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * without_comment - deletes any  comment from user input
+ * remCommentF - deletes any  comment from user input
  *
  * @input_str: input string parameter
  * Return: input with no comments
  */
-char *without_comment(char *input_str)
+char *remCommentF(char *input_str)
 {
 	int i = 0, limit = 0;
 	char nul_term = '\0';
@@ -43,7 +43,7 @@ char *without_comment(char *input_str)
 	}
 	if (limit != 0)
 	{
-		input_str = _realloc(input_str, i, limit + 1);
+		input_str = reallocFnc(input_str, i, limit + 1);
 
 		input_str[limit] = nul_term;
 	}

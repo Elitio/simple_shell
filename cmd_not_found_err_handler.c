@@ -1,17 +1,17 @@
 #include "main.h"
 
 /**
- * error_not_found -  creates a custom error message indicating that the
+ * errNotFoundF -  creates a custom error message indicating that the
  * specified command was not found in the shell
  * @shell_data: structure parameter
  * Return: the error message
  */
-char *error_not_found(data_shell *shell_data)
+char *errNotFoundF(data_shell *shell_data)
 {
-char *prg_vs = aux_itoa(shell_data->counter), *err_m = ": not found\n";
+char *prg_vs = intToStrF(shell_data->counter), *err_m = ": not found\n";
 int index = 0, i;
-int buff_len = _strlen(shell_data->av[0]) + get_len(shell_data->counter)
-	+ _strlen(shell_data->args[0]) + 16;
+int buff_len = lenStrF(shell_data->av[0]) + lenGetF(shell_data->counter)
+	+ lenStrF(shell_data->args[0]) + 16;
 char *err_str = malloc(sizeof(char) * (buff_len + 1));
 
 if (access(shell_data->args[0], X_OK) == -1)

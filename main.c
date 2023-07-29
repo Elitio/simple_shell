@@ -15,14 +15,14 @@ int main(int arg_count, char **arg_vector)
 
 	(void) arg_count;
 
-	signal(SIGINT, get_sigint);
+	signal(SIGINT, getSigF);
 
-	set_data(&shell_data, arg_vector);
+	setDataF(&shell_data, arg_vector);
 
-	shell_loop(&shell_data);
+	sh_loopF(&shell_data);
 
 
-	free_data(&shell_data);
+	freeDataF(&shell_data);
 
 	if (shell_data.status < stat_check)
 	{

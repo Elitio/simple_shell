@@ -3,27 +3,27 @@
 
 
 /**
- * check_error_cmd - checks and handles command execution errors.
+ * command_err - checks and handles command execution errors.
  * @direct: destination directory
  * @shell_data: data structure
  * Return: 1 on error, 0 otherwise
  */
-int check_error_cmd(char *direct, data_shell *shell_data)
+int command_err(char *direct, data_shell *shell_data)
 {
 	int is_same_cmd;
 
 	if (direct == NULL)
 	{
-		get_error(shell_data, 127);
+		getErrorF(shell_data, 127);
 		return (1);
 	}
 
-	is_same_cmd = _strcmp(shell_data->args[0], direct) == 0;
+	is_same_cmd = cpmStrF(shell_data->args[0], direct) == 0;
 
 	if ((!is_same_cmd && access(direct, X_OK) == -1) || (is_same_cmd &&
 				access(shell_data->args[0], X_OK) == -1))
 	{
-		get_error(shell_data, 126);
+		getErrorF(shell_data, 126);
 		free(direct);
 		return (1);
 	}
@@ -36,13 +36,13 @@ int check_error_cmd(char *direct, data_shell *shell_data)
 
 
 /**
- * _which - locate the full path of an executable command (cmd)
+ * find_pth - locate the full path of an executable command (cmd)
  * in the system's environment paths
  * @inp_cmd: command input parameter
  * @_environ: the environment variable array parameter
  * Return: full path of the command, otherwise NULL.
  */
-char *_which(char *inp_cmd, char **_environ)
+char *find_pth(char *inp_cmd, char **_environ)
 {
 	char *str_path = _getenv("PATH", _environ);
 	char *tokPath, *path_copy, *direct;
@@ -53,24 +53,24 @@ char *_which(char *inp_cmd, char **_environ)
 		return (NULL);
 	if (*inp_cmd == '/')
 		return ((stat(inp_cmd, &chkCmd) == 0)
-				? _strdup(inp_cmd) : NULL);
-	path_copy = _strdup(str_path);
+				? dupStrF(inp_cmd) : NULL);
+	path_copy = dupStrF(str_path);
 	if (!path_copy)
 		return (NULL);
-	tokPath = _strtok(path_copy, ":");
+	tokPath = tokStrF(path_copy, ":");
 	while (tokPath)
 	{
-		dirLen = _strlen(tokPath);
-		cmdLen = _strlen(inp_cmd);
+		dirLen = lenStrF(tokPath);
+		cmdLen = lenStrF(inp_cmd);
 		direct = malloc(dirLen + cmdLen + 2);
 		if (!direct)
 		{
 			free(path_copy);
 			return (NULL);
 		}
-		_strcpy(direct, tokPath);
-		_strcat(direct, "/");
-		_strcat(direct, inp_cmd);
+		cpyStrF(direct, tokPath);
+		catStrF(direct, "/");
+		catStrF(direct, inp_cmd);
 		if (stat(direct, &chkCmd) == 0)
 		{
 
@@ -78,7 +78,7 @@ char *_which(char *inp_cmd, char **_environ)
 			return (direct);
 		}
 		free(direct);
-		tokPath = _strtok(NULL, ":");
+		tokPath = tokStrF(NULL, ":");
 	}
 	free(path_copy);
 	return (NULL);
@@ -93,14 +93,14 @@ char *_which(char *inp_cmd, char **_environ)
 
 
 /**
- * cmd_exec - executing commands provided by the user
+ * _execute - executing commands provided by the user
  * @shell_data: structure parameter
  * Return: 1
  */
-int cmd_exec(data_shell *shell_data)
+int _execute(data_shell *shell_data)
 {
 	pid_t child_id;
-	int chExtStat, cmd_check = is_executable(shell_data);
+	int chExtStat, cmd_check = can_exec(shell_data);
 	char *cmd_path;
 
 	if (cmd_check == -1)
@@ -108,9 +108,9 @@ int cmd_exec(data_shell *shell_data)
 	switch (cmd_check)
 	{
 		case 0:
-			cmd_path = _which(shell_data->args[0],
+			cmd_path = find_pth(shell_data->args[0],
 					shell_data->_environ);
-			if (check_error_cmd(cmd_path, shell_data) == 1)
+			if (command_err(cmd_path, shell_data) == 1)
 				return (1);
 			break;
 		default:
@@ -121,7 +121,7 @@ int cmd_exec(data_shell *shell_data)
 	if (child_id == 0)
 	{
 		if (cmd_check == 0)
-			cmd_path = _which(shell_data->args[0],
+			cmd_path = find_pth(shell_data->args[0],
 					shell_data->_environ);
 		else
 			cmd_path = shell_data->args[0];
@@ -151,14 +151,14 @@ int cmd_exec(data_shell *shell_data)
 
 
 /**
- * is_cdir - check if the character at the current position in
+ * chk_dir - check if the character at the current position in
  * the given path string is a colon (':').
  * @str_path: pointer to the string representing the path.
  * @cur_pos_ind: pointer to an integer representing the current
  * position in the path string.
  * Return: 1 if colon (':') was found, 0 otherwise.
  */
-int is_cdir(char *str_path, int *cur_pos_ind)
+int chk_dir(char *str_path, int *cur_pos_ind)
 {
 	if (str_path[*cur_pos_ind] == ':')
 	{
@@ -186,13 +186,13 @@ int is_cdir(char *str_path, int *cur_pos_ind)
 
 
 /**
- * is_executable - checks if input command is executable
+ * can_exec - checks if input command is executable
  * checking from the data_shell structure.
  * @shell_data: structure parameter
  * Return: position from which the executable name starts, otherwise
  * 0 or -1, depending on the error value
  */
-int is_executable(data_shell *shell_data)
+int can_exec(data_shell *shell_data)
 {
 	char *cmd_inp = shell_data->args[0];
 
@@ -225,7 +225,7 @@ int is_executable(data_shell *shell_data)
 	if (stat(cmd_inp + cmd_ind, &chkCmd) == 0)
 		return (cmd_ind);
 
-	get_error(shell_data, 127);
+	getErrorF(shell_data, 127);
 	return (-1);
 }
 

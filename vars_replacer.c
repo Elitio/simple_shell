@@ -1,14 +1,14 @@
 #include "main.h"
 
 /**
- * check_env - checks if the typed variable is an env variable
+ * chkEnvF - checks if the typed variable is an env variable
  *
  * @strnode: linked list head
  * @user_inp: input parameter
  * @struct_info: data structure
  * Return: no return
  */
-void check_env(r_var **strnode, char *user_inp, data_shell *struct_info)
+void chkEnvF(r_var **strnode, char *user_inp, data_shell *struct_info)
 {
 	int horizon = 0, vert;
 	char **env_var;
@@ -51,7 +51,7 @@ void check_env(r_var **strnode, char *user_inp, data_shell *struct_info)
 
 
 /**
- * check_vars - check if the typed variable is $$ or $?
+ * chkVarsF - check if the typed variable is $$ or $?
  *
  * @strnode: head of the linked list
  * @user_inp: input parameter
@@ -59,14 +59,14 @@ void check_env(r_var **strnode, char *user_inp, data_shell *struct_info)
  * @struct_info: defined data structure parameter
  * Return: nothing
  */
-int check_vars(r_var **strnode, char *user_inp, char *str_stat,
+int chkVarsF(r_var **strnode, char *user_inp, char *str_stat,
 		data_shell *struct_info)
 {
 	int counter = 0;
 	char nxtChar = user_inp[counter + 1];
 	char nul_term = '\0', dollar = '$';
-	int str_length = cust_strlen(str_stat);
-	int pid_length = cust_strlen(struct_info->pid);
+	int str_length = custlenStrF(str_stat);
+	int pid_length = custlenStrF(struct_info->pid);
 
 	while (user_inp[counter] != nul_term)
 	{
@@ -91,7 +91,7 @@ int check_vars(r_var **strnode, char *user_inp, char *str_stat,
 				break;
 
 			default:
-				check_env(strnode, user_inp + counter,
+				chkEnvF(strnode, user_inp + counter,
 				struct_info);
 				break;
 		}
@@ -104,11 +104,11 @@ int check_vars(r_var **strnode, char *user_inp, char *str_stat,
 }
 
 /**
- * cust_strlen - finds the length of a string
+ * custlenStrF - finds the length of a string
  * @str_inp: input string parameter
  * Return: string length
  */
-int cust_strlen(char *str_inp)
+int custlenStrF(char *str_inp)
 {
 	int length = 0;
 	char nul_term = '\0';
@@ -121,7 +121,7 @@ int cust_strlen(char *str_inp)
 }
 
 /**
- * replaced_input - replaces string into variables
+ * replaceInputF - replaces string into variables
  *
  * @strNode: head of the linked list
  * @str_inp: input string parameter
@@ -129,7 +129,7 @@ int cust_strlen(char *str_inp)
  * @len_new: new length parameter
  * Return: the replaced string.
  */
-char *replaced_input(r_var **strNode, char *str_inp, char *replaced_str,
+char *replaceInputF(r_var **strNode, char *str_inp, char *replaced_str,
 int len_new)
 {
 	int i = 0, j = 0;
@@ -175,14 +175,14 @@ int len_new)
 
 
 /**
- * rep_var - performs variable replacement in the input string using a linked
+ * repVarFnc - performs variable replacement in the input string using a linked
  * list of variables stored in the head structure
  *
  * @str_inp: input string parameter
  * @struct_info: structure parameter
  * Return: replaced string
  */
-char *rep_var(char *str_inp, data_shell *struct_info)
+char *repVarFnc(char *str_inp, data_shell *struct_info)
 {
 	char *str_stat;
 	char *replaced_str;
@@ -191,8 +191,8 @@ char *rep_var(char *str_inp, data_shell *struct_info)
 
 	int len_new;
 
-	str_stat = aux_itoa(struct_info->status);
-	orig_len = check_vars(&strNode, str_inp, str_stat, struct_info);
+	str_stat = intToStrF(struct_info->status);
+	orig_len = chkVarsF(&strNode, str_inp, str_stat, struct_info);
 
 	if (strNode == NULL)
 	{
@@ -210,13 +210,13 @@ char *rep_var(char *str_inp, data_shell *struct_info)
 	replaced_str = malloc(sizeof(char) * (len_new + 1));
 
 	replaced_str[len_new] = '\0';
-	replaced_str = replaced_input(&strNode, str_inp, replaced_str,
+	replaced_str = replaceInputF(&strNode, str_inp, replaced_str,
 			len_new);
 
 	free(str_inp);
 
 	free(str_stat);
 
-	free_rvar_list(&strNode);
+	freeVarLstF(&strNode);
 	return (replaced_str);
 }
