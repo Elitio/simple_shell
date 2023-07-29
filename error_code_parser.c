@@ -13,31 +13,31 @@
  */
 int get_error(data_shell *shell_data, int error_ref)
 {
-	char *error = NULL;
+	char *error_ret = NULL;
 
 
 
 	if (error_ref == -1)
-		error = error_env(shell_data);
+		error_ret = error_env(shell_data);
 	else if (error_ref == 126)
-		error = error_path_126(shell_data);
+		error_ret = error_path_126(shell_data);
 	else if (error_ref == 127)
-		error = error_not_found(shell_data);
+		error_ret = error_not_found(shell_data);
 
 	else if (error_ref == 2)
 	{
 		if (_strcmp("exit", shell_data->args[0]) == 0)
-			error = error_exit_shell(shell_data);
+			error_ret = error_exit_shell(shell_data);
 		else if (_strcmp("cd", shell_data->args[0]) == 0)
-			error = error_get_cd(shell_data);
+			error_ret = error_get_cd(shell_data);
 	}
 
 
-	if (error)
+	if (error_ret != NULL)
 	{
-		write(STDERR_FILENO, error, _strlen(error));
+		write(STDERR_FILENO, error_ret, _strlen(error_ret));
 
-		free(error);
+		free(error_ret);
 	}
 
 

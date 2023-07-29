@@ -20,33 +20,33 @@ char *error_get_cd(data_shell *shell_data)
 	}
 	else
 	{
-		err_str_msg = ": Oops! Cannot change directory! ";
+		err_str_msg = ": can't cd to ";
 		ref_len = _strlen(shell_data->args[1]);
 	}
-
 	buff_len = _strlen(shell_data->av[0]) + _strlen(shell_data->args[0])
 		+ _strlen(prg_ver_str) + _strlen(err_str_msg) + ref_len + 5;
 	err_str = malloc(sizeof(char) * (buff_len + 1));
-
 	if (err_str == NULL)
 	{
 		free(prg_ver_str);
 		return (NULL);
 	}
 	err_str_ptr = err_str;
-	err_str_ptr = _strcpy(err_str_ptr, shell_data->av[0]);
-	err_str_ptr = _strcpy(err_str_ptr, ": ");
-	err_str_ptr = _strcpy(err_str_ptr, prg_ver_str);
-	err_str_ptr = _strcpy(err_str_ptr, err_str_msg);
-
-	if (shell_data->args[1][0] != '-')
+	_strcpy(err_str_ptr, shell_data->av[0]);
+	_strcat(err_str_ptr, ": ");
+	_strcat(err_str_ptr, prg_ver_str);
+	_strcat(err_str_ptr, ": ");
+	_strcat(err_str_ptr, shell_data->args[0]);
+	_strcat(err_str_ptr, err_str_msg);
+	if (shell_data->args[1][0] == '-')
 	{
-		err_str_ptr = _strcpy(err_str_ptr, shell_data->args[1]);
+		_strcat(err_str_ptr, shell_data->args[1]);
 	}
-
-	*err_str_ptr = '\0';
+	_strcat(err_str_ptr, shell_data->args[1]);
+	_strcat(err_str_ptr, "\n");
+	_strcat(err_str_ptr, "\0");
 	free(prg_ver_str);
-
-	return (err_str);
+	return (err_str_ptr);
 }
+
 

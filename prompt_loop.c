@@ -13,7 +13,7 @@ void shell_loop(data_shell *data_shell_info)
 	int the_end_of_file;
 
 	do {
-		write(STDOUT_FILENO, "$ ", 2);
+		write(STDIN_FILENO, "$ ", 2);
 		user_input = read_line(&the_end_of_file);
 		if (the_end_of_file != -1)
 		{
