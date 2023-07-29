@@ -13,12 +13,14 @@ void cdDotF(data_shell *shell_data)
 
 	/* Get the current working directory and store it in 'current_dir' */
 	getcwd(current_dir, sizeof(current_dir));
+	/* Duplicate the current working directory and store it in 'copied_current_dir' */
 	copied_current_dir = dupStrF(current_dir);
 	/* Set the environment variable "OLDPWD" to the copied current directory */
 	set_env("OLDPWD", copied_current_dir, shell_data);
 	directory = shell_data->args[1];
 	switch (cpmStrF(".", directory))
 	{
+		/* If the directory is ".", set the environment variable "PWD" to the current directory */
 		case 0:
 			set_env("PWD", copied_current_dir, shell_data);
 			free(copied_current_dir);
