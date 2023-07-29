@@ -3,11 +3,11 @@
 
 
 /**
- * rev_string - reverses a string
+ * strRevF - reverses a string
  * @string: input string parameter
  * Return: nothing
  */
-void rev_string(char *string)
+void strRevF(char *string)
 {
 	int count = 0;
 	char *start = string;

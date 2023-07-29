@@ -3,11 +3,11 @@
 
 
 /**
- * exit_shell - handles the behavior of the "exit" command.
+ * extShFnc - handles the behavior of the "exit" command.
  * @shell_data: structure parameter
  * Return: 0 on success otherwise 1 to indicate an error.
  */
-int exit_shell(data_shell *shell_data)
+int extShFnc(data_shell *shell_data)
 {
 	unsigned int stat_val = 0;
 	int count;
@@ -20,7 +20,7 @@ int exit_shell(data_shell *shell_data)
 		{
 			if (arg_str[count] < '0' || arg_str[count] > '9')
 			{
-				get_error(shell_data, 2);
+				getErrorF(shell_data, 2);
 				shell_data->status = 2;
 				return (1);
 			}
@@ -29,7 +29,7 @@ int exit_shell(data_shell *shell_data)
 
 		if (stat_val > INT_MAX)
 		{
-			get_error(shell_data, 2);
+			getErrorF(shell_data, 2);
 			shell_data->status = 2;
 			return (1);
 		}

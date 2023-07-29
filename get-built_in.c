@@ -1,22 +1,22 @@
 #include "main.h"
 
 /**
- * get_builtin - Get the function pointer of a built-in command
+ * isBuiltInF - Get the function pointer of a built-in command
  *
  * @cmd: The command name.
  * Return: Function pointer of the built-in command.
  */
 
 
-int (*get_builtin(char *cmd))(data_shell *)
+int (*isBuiltInF(char *cmd))(data_shell *)
 {
 	int i;
 
 	builtin_t builtin[] = {
 		{ "unsetenv", _unsetenv },
-		{ "cd", cd_shell },
+		{ "cd", cdHandlerF },
 		{ "env", _env },
-		{ "exit", exit_shell },
+		{ "exit", extShFnc },
 		{ "setenv", _setenv },
 		{ NULL, NULL }
 	};
@@ -29,7 +29,7 @@ int (*get_builtin(char *cmd))(data_shell *)
 
 	for (i = 0; builtin[i].name; i++)
 	{
-		if (builtin[i].name != NULL && _strcmp(builtin[i].name,
+		if (builtin[i].name != NULL && cpmStrF(builtin[i].name,
 					cmd) == 0)
 		{
 			return (builtin[i].f);

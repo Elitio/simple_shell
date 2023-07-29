@@ -16,7 +16,7 @@ char *_getenv(const char *name_inp, char **_environ)
 
 	while (_environ[env_ind])
 	{
-		equal_ind = cmp_env_name(_environ[env_ind], name_inp);
+		equal_ind = cmpEnvNameF(_environ[env_ind], name_inp);
 		if (equal_ind)
 		{
 			matched_var = _environ[env_ind] + equal_ind;
@@ -59,12 +59,12 @@ int _env(data_shell *shell_data)
 }
 
 /**
- * cmp_env_name - compare an environment variable's name with name input
+ * cmpEnvNameF - compare an environment variable's name with name input
  * @env_var_name: the environment variable
  * @name_input: the name to compare with
  * Return: 0 if they are not equal or i + 1
  */
-int cmp_env_name(const char *env_var_name, const char *name_input)
+int cmpEnvNameF(const char *env_var_name, const char *name_input)
 {
 	int i = 0;
 

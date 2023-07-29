@@ -2,13 +2,13 @@
 
 
 /**
- * _memcpy - it copies bytes from a source memory area to a dest memory area
+ * cpyMemF - it copies bytes from a source memory area to a dest memory area
  * @dest_ptr: destination pointer parameter
  * @src_ptr: source pointer parameter
  * @cpy_size: size of new pointer.
  * Return: nothing
  */
-void _memcpy(void *dest_ptr, const void *src_ptr, unsigned int cpy_size)
+void cpyMemF(void *dest_ptr, const void *src_ptr, unsigned int cpy_size)
 {
 
 	char *src_char_ptr = (char *)src_ptr;

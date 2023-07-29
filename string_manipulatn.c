@@ -6,7 +6,7 @@
 
 
 /**
- * _strcmp - compares two strings.
+ * cpmStrF - compares two strings.
  * @first_str: type str compared
  * @second_str: type str compared
  * Return: 1 if first_str is greater than second_str
@@ -15,7 +15,7 @@
 
 
 
-int _strcmp(char *first_str, char *second_str)
+int cpmStrF(char *first_str, char *second_str)
 {
 	int count = 0;
 	int result = 0;
@@ -37,13 +37,13 @@ int _strcmp(char *first_str, char *second_str)
 
 
 /**
- * _strspn -  it calculates the length of the initial segment of a string
+ * StrSpanF -  it calculates the length of the initial segment of a string
  * consisting of only characters present in another string
  * @string: string to work on.
  * @checkn_str: string to check for characters
  * Return: length of the substring found so far.
  */
-int _strspn(char *string, char *checkn_str)
+int StrSpanF(char *string, char *checkn_str)
 {
 	int i = 0, j;
 
@@ -69,12 +69,12 @@ int _strspn(char *string, char *checkn_str)
 
 
 /**
- * _strcat - concatenate or joins two strings
+ * catStrF - concatenate or joins two strings
  * @str_dest: string to which other string would be joined to
  * @str_source: string joining other string parameter
  * Return: the combined or final string
  */
-char *_strcat(char *str_dest, const char *str_source)
+char *catStrF(char *str_dest, const char *str_source)
 {
 	int count1 = 0;
 	int count2 = 0;
@@ -101,12 +101,12 @@ char *_strcat(char *str_dest, const char *str_source)
 
 
 /**
- * _strchr - searches for the first occurrence of a character in a string.
+ * chrStrF - searches for the first occurrence of a character in a string.
  * @string: string.
  * @charac: character.
  * Return: a pointer to the location of that character.
  */
-char *_strchr(char *string, char charac)
+char *chrStrF(char *string, char charac)
 {
 	while (*string != '\0')
 	{
@@ -123,12 +123,12 @@ char *_strchr(char *string, char charac)
 
 
 /**
- * *_strcpy - Copies a string to another string
+ * *cpyStrF - Copies a string to another string
  * @str_dest: buffer other string is to be copied to
  * @str_source: string buffer to copy to the other
  * Return: the final string
  */
-char *_strcpy(char *str_dest, char *str_source)
+char *cpyStrF(char *str_dest, char *str_source)
 {
 	size_t count = 0;
 

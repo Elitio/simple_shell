@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * free_rvar_list - frees the memory allocated for a linked list nodes.
+ * freeVarLstF - frees the memory allocated for a linked list nodes.
  * @head: linked list head
  * Return: nothing
  */
-void free_rvar_list(r_var **head)
+void freeVarLstF(r_var **head)
 {
 	r_var *list_node = *head;
 

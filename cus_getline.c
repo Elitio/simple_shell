@@ -72,13 +72,13 @@ static ssize_t read_char(char *c, FILE *stream)
 
 
 /**
-* get_line -  reads input line from the stream and store it in the buffer
+* getLineF -  reads input line from the stream and store it in the buffer
 * @lineptr: A pointer to a pointer that will store the address of the buffer
 * @n: A pointer to the size of the buffer
 * @stream: The input stream from which the character will be read
 * Return: the number of characters or -1 on error
 */
-ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
+ssize_t getLineF(char **lineptr, size_t *n, FILE *stream)
 {
 	ssize_t i = 0;
 	char c;

@@ -3,14 +3,14 @@
 
 
 /**
- * _reallocdp -  reallocate memory for a dynamic array of strings.
+ * reallocDpF -  reallocate memory for a dynamic array of strings.
  * @array_ptr: Pointer to the existing dynamic array of strings.
  * @prev_size: current size of the dynamic array (number of elements).
  * @realloc_size: desired new size of the dynamic array (number of elements).
  * Return: pointer to the newly allocated memory (newptr) after the
  * reallocation or NULL on failure.
  */
-char **_reallocdp(char **array_ptr, unsigned int prev_size,
+char **reallocDpF(char **array_ptr, unsigned int prev_size,
 		unsigned int realloc_size)
 {
 	unsigned int count = 0;
@@ -41,13 +41,13 @@ char **_reallocdp(char **array_ptr, unsigned int prev_size,
 
 
 /**
- * _realloc - reallocates memory for a previously allocated memory block.
+ * reallocFnc - reallocates memory for a previously allocated memory block.
  * @inp_buffer: memory previously allocated.
  * @prev_size: previously allocated memory size.
  * @realloc_size: newly allocated memory size.
  * Return: reallocated buffer, previous buffer or NULL
  */
-void *_realloc(void *inp_buffer, unsigned int prev_size,
+void *reallocFnc(void *inp_buffer, unsigned int prev_size,
 		unsigned int realloc_size)
 {
 	unsigned int cpy_size;
