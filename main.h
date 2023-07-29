@@ -119,7 +119,7 @@ char *find_pth(char *inp_cmd, char **_environ);
 int _execute(data_shell *shell_data);
 int chk_dir(char *str_path, int *cur_pos_ind);
 int can_exec(data_shell *shell_data);
-void printInError(data_shell *shell_data, char *inp_str, int ind, 
+void printInError(data_shell *shell_data, char *inp_str, int ind,
 		int isSingle);
 int chkChar(char *inp_str, int *ind);
 int repChar(char *inp_str, int ind);
