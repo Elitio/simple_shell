@@ -26,15 +26,13 @@ void shell_loop(data_shell *data_shell_info)
 			{
 				case 1:
 					data_shell_info->status = 2;
+					free(user_input);
+					continue;
 					break;
 				default:
 					break;
 			}
-			if (data_shell_info->status == 2)
-			{
-				free(user_input);
-				continue;
-			}
+			
 			user_input = rep_var(user_input, data_shell_info);
 			count = split_commands(data_shell_info, user_input);
 			data_shell_info->counter += 1;
