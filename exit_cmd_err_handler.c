@@ -8,13 +8,16 @@
  */
 char *error_exit_shell(data_shell *shell_data)
 {
-	char *ver_str = aux_itoa(shell_data->counter);
+	char *ver_str;
+	int ver_len, arg0_len, arg1_len, total_len;
 	int av_len = _strlen(shell_data->av[0]);
-	char *error_ptr, *errorMs;
-	int ver_len = _strlen(ver_str);
-	int arg0_len = _strlen(shell_data->args[0]);
-	int arg1_len = _strlen(shell_data->args[1]);
-	int total_len = av_len + ver_len
+	char *errorMs;
+
+	ver_str = aux_itoa(shell_data->counter);
+	ver_len = _strlen(ver_str);
+	arg0_len = _strlen(shell_data->args[0]);
+	arg1_len = _strlen(shell_data->args[1]);
+	total_len = av_len + ver_len
 	+ arg0_len + arg1_len + 23;
 
 	errorMs = malloc(sizeof(char) * (total_len + 1));
@@ -24,23 +27,15 @@ char *error_exit_shell(data_shell *shell_data)
 		return (NULL);
 	}
 
-	error_ptr = errorMs;
-	_strcpy(error_ptr, shell_data->av[0]);
-	error_ptr += av_len;
-	_strcpy(error_ptr, ": ");
-	error_ptr += 2;
-	_strcpy(error_ptr, ver_str);
-	error_ptr += ver_len;
-	_strcpy(error_ptr, ": ");
-	error_ptr += 2;
-	_strcpy(error_ptr, shell_data->args[0]);
-	error_ptr += arg0_len;
-	_strcpy(error_ptr, ": Illegal number: ");
-	error_ptr += 20;
-	_strcpy(error_ptr, shell_data->args[1]);
-	error_ptr += arg1_len;
-	_strcpy(error_ptr, "\n\0");
-
+	_strcpy(errorMs, datash->av[0]);
+	_strcat(errorMs, ": ");
+	_strcat(errorMs, ver_str);
+	_strcat(errorMs, ": ");
+	_strcat(errorMs, datash->args[0]);
+	_strcat(errorMs, ": Illegal number: ");
+	_strcat(errorMs, datash->args[1]);
+	_strcat(errorMs, "\n");
+	_strcat(errorMs, "\0");
 	free(ver_str);
 	return (errorMs);
 }
