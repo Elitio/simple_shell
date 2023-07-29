@@ -113,6 +113,7 @@ typedef struct builtin_s
 
 
 
+<<<<<<< HEAD
 /*function edits */
 int command_err(char *direct, data_shell *shell_data);
 char *find_pth(char *inp_cmd, char **_environ);
@@ -120,6 +121,15 @@ int _execute(data_shell *shell_data);
 int chk_dir(char *str_path, int *cur_pos_ind);
 int can_exec(data_shell *shell_data);
 void printInError(data_shell *shell_data, char *inp_str, int ind,
+=======
+
+int check_error_cmd(char *direct, data_shell *shell_data);
+char *_which(char *inp_cmd, char **_environ);
+int cmd_exec(data_shell *shell_data);
+int is_cdir(char *str_path, int *cur_pos_ind);
+int is_executable(data_shell *shell_data);
+void print_syntax_error(data_shell *shell_data, char *inp_str, int ind,
+>>>>>>> 9e4da33c62ac7a3e62cd9cdb4c27e523791a96c0
 		int isSingle);
 int chkChar(char *inp_str, int *ind);
 int repChar(char *inp_str, int ind);
@@ -146,8 +156,13 @@ int skip_var_in_input(r_var *pointr);
 void printInError(data_shell *datash, char *input, int i, int bool);
 
 
+<<<<<<< HEAD
 /*old functions added */
 void chkEnvF(r_var **strnode, char *user_inp, data_shell *struct_info);
+=======
+
+void check_env(r_var **strnode, char *user_inp, data_shell *struct_info);
+>>>>>>> 9e4da33c62ac7a3e62cd9cdb4c27e523791a96c0
 
 int chkVarsF(r_var **strnode, char *user_inp, char *str_stat,
 		data_shell *struct_info);
