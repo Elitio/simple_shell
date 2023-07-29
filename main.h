@@ -113,7 +113,7 @@ typedef struct builtin_s
 
 
 
-/*function edits */
+
 int check_error_cmd(char *direct, data_shell *shell_data);
 char *_which(char *inp_cmd, char **_environ);
 int cmd_exec(data_shell *shell_data);
@@ -146,7 +146,7 @@ int skip_var_in_input(r_var *pointr);
 void print_syntax_error(data_shell *datash, char *input, int i, int bool);
 
 
-/*old functions added */
+
 void check_env(r_var **strnode, char *user_inp, data_shell *struct_info);
 
 int check_vars(r_var **strnode, char *user_inp, char *str_stat,
