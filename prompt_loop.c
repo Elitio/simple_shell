@@ -32,7 +32,7 @@ void shell_loop(data_shell *data_shell_info)
 				default:
 					break;
 			}
-			
+
 			user_input = rep_var(user_input, data_shell_info);
 			count = split_commands(data_shell_info, user_input);
 			data_shell_info->counter += 1;

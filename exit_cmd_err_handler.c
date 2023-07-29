@@ -27,13 +27,13 @@ char *error_exit_shell(data_shell *shell_data)
 		return (NULL);
 	}
 
-	_strcpy(errorMs, datash->av[0]);
+	_strcpy(errorMs, shell_data->av[0]);
 	_strcat(errorMs, ": ");
 	_strcat(errorMs, ver_str);
 	_strcat(errorMs, ": ");
-	_strcat(errorMs, datash->args[0]);
+	_strcat(errorMs, shell_data->args[0]);
 	_strcat(errorMs, ": Illegal number: ");
-	_strcat(errorMs, datash->args[1]);
+	_strcat(errorMs, shell_data->args[1]);
 	_strcat(errorMs, "\n");
 	_strcat(errorMs, "\0");
 	free(ver_str);
