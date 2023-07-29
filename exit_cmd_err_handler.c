@@ -40,7 +40,7 @@ char *error_exit_shell(data_shell *shell_data)
 	for (i = 0; i < cmd_len; i++)
 		err_str[offset++] = shell_data->args[0][i];
 	for (i = 0; i < 19; i++)
-		err_str[offset++] = ": Oops! Wrong exit status: "[i];
+		err_str[offset++] = ": Illegal number: "[i];
 	for (i = 0; i < arg_len; i++)
 		err_str[offset++] = shell_data->args[1][i];
 	err_str[offset++] = '\n';
